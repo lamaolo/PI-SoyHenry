@@ -36,6 +36,13 @@ code {
   text-decoration: none;
 }
 
+.unstyled-btn {
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
 .main-btn {
   border: none;
   background-color: var(--amarillo);

@@ -1,6 +1,46 @@
-.Home-countries {
-  max-width: 1440px;
+.Home {
+  max-width: 1300px;
+  padding: 20px;
   margin: 0 auto;
+}
+
+.Home-header {
+  padding: 20px;
+  height: 80px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  background-color: var(--amarillo);
+  border-radius: 8px;
+}
+
+.Home-header-form {
+  height: 100%;
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.Home-header-form input {
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+  background: white;
+  font-size: 1.8rem;
+}
+
+.Home-header-form button {
+  background: black;
+  color: var(--amarillo);
+  width: 40px;
+}
+
+.Home-header-form button svg {
+  width: 20px;
+  font-weight: bold;
+}
+
+.Home-countries {
   display: flex;
   justify-content: space-between;
   gap: 40px;

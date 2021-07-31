@@ -1,12 +1,13 @@
 .CountryCard {
   position: relative;
-  height: 280px;
-  width: 280px;
+  height: 300px;
+  width: 350px;
   box-shadow: var(--amarillo) 5px 5px;
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.25s cubic-bezier(0.21, 0.79, 0.59, 0.77);
+  flex: 1 1 auto;
 }
 
 .CountryCard img {
