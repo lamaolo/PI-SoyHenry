@@ -1,6 +1,7 @@
 const initialState = {
   countries: [],
   countryDetail: {},
+  error: '',
 };
 
 const reducers = (state = initialState, action) => {
@@ -9,6 +10,20 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         countries: action.payload,
+        error: '',
+      };
+    }
+    case 'FILTER_COUNTRIES_BY_NAME': {
+      return {
+        ...state,
+        countries: action.payload,
+        error: '',
+      };
+    }
+    case '404_COUNTRIES_NAME': {
+      return {
+        ...state,
+        error: `No se ha encontrado ningun pais con el nombre "${action.payload}".`,
       };
     }
     default: {

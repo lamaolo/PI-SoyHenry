@@ -14,35 +14,27 @@
   border-radius: 8px;
 }
 
-.Home-header-form {
-  height: 100%;
-  display: flex;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.Home-header-form input {
-  padding: 5px 10px;
-  outline: none;
-  border: none;
-  background: white;
-  font-size: 1.8rem;
-}
-
-.Home-header-form button {
-  background: black;
-  color: var(--amarillo);
-  width: 40px;
-}
-
-.Home-header-form button svg {
-  width: 20px;
-  font-weight: bold;
-}
-
 .Home-countries {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 40px;
   flex-wrap: wrap;
+}
+
+.Home-countries-error {
+  width: 100%;
+  padding: 10px 20px;
+  background: rgb(255, 64, 64);
+  border-radius: 8px;
+  display: flex;
+}
+
+.Home-countries-error svg {
+  width: 25px;
+  margin-right: 8px;
+  color: white;
+}
+
+.Home-countries-error h2 {
+  color: white;
 }

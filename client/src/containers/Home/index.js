@@ -1,12 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { connect } from 'react-redux';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
 import { fetchProducts } from '../../actions';
 import { CountryCard } from '../../components/CountryCard';
+import Search from '../../components/Search';
 
 import './styles.css';
 
-const Home = ({ fetchProducts, countries }) => {
+const Home = ({ fetchProducts, countries, error }) => {
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -14,14 +15,11 @@ const Home = ({ fetchProducts, countries }) => {
   return (
     <div className="Home">
       <header className="Home-header">
-        <form className="Home-header-form">
-          <input
-            type="text"
-            name="country"
-            placeholder="Busca un pais..."
-            autoComplete="off"
-          />
-          <button className="unstyled-btn" type="submit">
+        <Search />
+      </header>
+      <main className="Home-countries">
+        {error ? (
+          <div className="Home-countries-error">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -33,21 +31,24 @@ const Home = ({ fetchProducts, countries }) => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-          </button>
-        </form>
-      </header>
-      <main className="Home-countries">
-        {countries.slice(0, 9).map(({ id, image, continent, name }) => (
-          <CountryCard
-            id={id}
-            image={image}
-            continent={continent}
-            name={name}
-          />
-        ))}
+            <h2>{error}</h2>
+          </div>
+        ) : (
+          countries
+            .slice(0, 9)
+            .map(({ id, image, continent, name }) => (
+              <CountryCard
+                key={id}
+                id={id}
+                image={image}
+                continent={continent}
+                name={name}
+              />
+            ))
+        )}
       </main>
     </div>
   );
@@ -60,6 +61,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => {
   return {
     countries: state.countries,
+    error: state.error,
   };
 };
 

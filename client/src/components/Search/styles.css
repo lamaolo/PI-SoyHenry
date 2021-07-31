@@ -1,0 +1,26 @@
+.Search-form {
+  height: 100%;
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.493);
+}
+
+.Search-form input {
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+  background: white;
+  font-size: 1.8rem;
+}
+
+.Search-form button {
+  background: black;
+  color: var(--amarillo);
+  width: 40px;
+}
+
+.Search-form button svg {
+  width: 20px;
+  font-weight: bold;
+}

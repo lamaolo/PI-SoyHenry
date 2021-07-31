@@ -1,7 +1,7 @@
 .CountryCard {
   position: relative;
   height: 300px;
-  width: 350px;
+  max-width: 393px;
   box-shadow: var(--amarillo) 5px 5px;
   background-color: white;
   border-radius: 8px;
@@ -27,6 +27,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  text-align: center;
   background-color: white;
   box-shadow: 1px 0 6px black;
   transition: all 0.25s cubic-bezier(0.21, 0.79, 0.59, 0.77);
