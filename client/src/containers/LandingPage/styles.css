@@ -1,0 +1,78 @@
+.container {
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.LandingPage {
+  padding: 20px;
+  height: 600px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: var(--amarillo) 10px 10px;
+  background-color: rgb(255, 255, 255);
+  transition: all 0.25s ease-in-out;
+}
+
+.LandingPage:hover {
+  box-shadow: var(--amarillo) 14px 14px;
+}
+
+.LandingPage-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.LandingPage-header h1 {
+  position: relative;
+  color: black;
+  font-size: 4rem;
+  z-index: 100;
+}
+
+.LandingPage-header h1::after {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 15px;
+  background-color: var(--amarillo);
+  bottom: 2px;
+  right: 0;
+  z-index: -10;
+}
+
+.LandingPage-header img {
+  margin-top: 20px;
+  width: 100%;
+  filter: drop-shadow(var(--amarillo) 4px 4px);
+}
+
+.LandingPage-button {
+  margin-bottom: 27px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background-color: var(--amarillo);
+  box-shadow: black 2px 2px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.LandingPage-button:hover {
+  box-shadow: black 4px 4px;
+}
+
+.LandingPage-button svg {
+  width: 25px;
+  margin-left: 5px;
+}
