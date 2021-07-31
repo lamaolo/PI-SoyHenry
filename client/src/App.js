@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { LandingPage } from './containers/LandingPage';
-import { Home } from './containers/Home';
+import Home from './containers/Home';
 
 function App() {
   return (

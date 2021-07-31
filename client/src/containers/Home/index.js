@@ -1,17 +1,14 @@
+import { connect } from 'react-redux';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { fetchProducts } from '../../actions';
 import { CountryCard } from '../../components/CountryCard';
 
 import './styles.css';
 
-export const Home = () => {
-  const [countries, setCountries] = useState([]);
-
+const Home = ({ fetchProducts, countries }) => {
   useEffect(() => {
-    axios('http://localhost:3001/api/countries')
-      .then(({ data: { data } }) => setCountries(data))
-      .catch((e) => console.log(e));
+    fetchProducts();
   }, []);
 
   return (
@@ -55,3 +52,15 @@ export const Home = () => {
     </div>
   );
 };
+
+const mapDispatchToProps = {
+  fetchProducts,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    countries: state.countries,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const fetchProducts = () => {
   return (dispatch) => {
     axios('http://localhost:3001/api/countries')
