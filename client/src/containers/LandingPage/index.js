@@ -12,7 +12,7 @@ export const LandingPage = () => {
           <img src={logo} alt="Countries" />
         </header>
         <Link to="/home" style={{ textDecoration: 'none' }}>
-          <button className="LandingPage-button">
+          <button className="main-btn LandingPage-button">
             <strong>Ingresar</strong>
             <svg
               xmlns="http://www.w3.org/2000/svg"

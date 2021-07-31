@@ -31,3 +31,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.unstyled-link {
+  text-decoration: none;
+}
+
+.main-btn {
+  border: none;
+  background-color: var(--amarillo);
+  color: black;
+  padding: 8px 15px;
+  font-weight: bold;
+  font-size: 1.6rem;
+  border-radius: 8px;
+  box-shadow: black 2px 2px;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.main-btn:hover {
+  box-shadow: black 4px 4px;
+}

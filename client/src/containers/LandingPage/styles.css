@@ -55,17 +55,9 @@
 
 .LandingPage-button {
   margin-bottom: 27px;
-  padding: 5px 10px;
-  border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
-  background-color: var(--amarillo);
-  box-shadow: black 2px 2px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.1s ease-in-out;
 }
 
 .LandingPage-button:hover {

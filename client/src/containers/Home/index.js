@@ -15,10 +15,17 @@ export const Home = () => {
   }, []);
 
   return (
-    <div>
-      {countries.map(({ image, continent, name }) => {
-        <CountryCard image={image} continent={continent} name={name} />;
-      })}
+    <div className="Home">
+      <main className="Home-countries">
+        {countries.slice(0, 20).map(({ id, image, continent, name }) => (
+          <CountryCard
+            id={id}
+            image={image}
+            continent={continent}
+            name={name}
+          />
+        ))}
+      </main>
     </div>
   );
 };
