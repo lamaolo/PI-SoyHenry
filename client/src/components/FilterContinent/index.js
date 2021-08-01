@@ -8,7 +8,6 @@ const FilterContinent = ({ selectedContinents, handleCheckboxClick }) => {
         <label htmlFor="Americas">Americas</label>
         <input
           onChange={handleCheckboxClick}
-          checked={selectedContinents.Americas}
           type="checkbox"
           name="Americas"
           id="Americas"

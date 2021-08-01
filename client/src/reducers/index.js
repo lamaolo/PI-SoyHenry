@@ -48,6 +48,23 @@ const reducers = (state = initialState, action) => {
         };
       }
     }
+    case 'FILTER_COUNTRIES_BY_POPULATION': {
+      if (action.payload === 'Descendiente') {
+        return {
+          ...state,
+          filteredCountries: state.countries.sort((a, b) =>
+            a.population > b.population ? 1 : -1
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          filteredCountries: state.countries.sort((a, b) =>
+            a.population < b.population ? 1 : -1
+          ),
+        };
+      }
+    }
     case '404_COUNTRIES_NAME': {
       return {
         ...state,

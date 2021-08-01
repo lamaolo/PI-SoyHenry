@@ -1,20 +1,16 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { filterByContinent, fetchCountries } from '../../actions';
+
 import FilterContinent from '../FilterContinent';
+import FilterPopulation from '../FilterPopulation';
+import { filterByContinent, filterByPopulation } from '../../actions';
 
 import './styles.css';
 
-const Filters = ({ filterByContinent, fetchCountries }) => {
+const Filters = ({ filterByContinent, filterByPopulation }) => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
-  const [selectedContinents, setSelectedContinents] = useState({
-    Americas: false,
-    Africa: false,
-    Asia: false,
-    Europe: false,
-    Oceania: false,
-    Polar: false,
-  });
+  const [selectedContinents, setSelectedContinents] = useState();
+  const [populationFilter, setPopulationFilter] = useState('Ninguno');
 
   const handleCheckboxClick = (e) => {
     setSelectedContinents({
@@ -29,6 +25,10 @@ const Filters = ({ filterByContinent, fetchCountries }) => {
 
     for (const key in selectedContinents) {
       if (selectedContinents[key]) filters.push(key);
+    }
+
+    if (populationFilter !== 'Ninguno') {
+      filterByPopulation(populationFilter);
     }
 
     filterByContinent(filters);
@@ -55,10 +55,16 @@ const Filters = ({ filterByContinent, fetchCountries }) => {
         />
       </svg>
       <div className={`Filters-box ${isFilterVisible && 'visible'}`}>
-        <FilterContinent
-          selectedContinents={selectedContinents}
-          handleCheckboxClick={handleCheckboxClick}
-        />
+        <div className="Filters-box-filters">
+          <FilterPopulation
+            populationFilter={populationFilter}
+            setPopulationFilter={setPopulationFilter}
+          />
+          <FilterContinent
+            selectedContinents={selectedContinents}
+            handleCheckboxClick={handleCheckboxClick}
+          />
+        </div>
         <div
           onClick={handleApplyFilters}
           className="main-btn Filters-apply-button"
@@ -70,4 +76,6 @@ const Filters = ({ filterByContinent, fetchCountries }) => {
   );
 };
 
-export default connect(null, { filterByContinent, fetchCountries })(Filters);
+export default connect(null, { filterByContinent, filterByPopulation })(
+  Filters
+);

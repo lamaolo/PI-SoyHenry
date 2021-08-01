@@ -24,7 +24,7 @@
   padding: 20px;
   position: absolute;
   height: 300px;
-  width: 200px;
+  width: 320px;
   bottom: -310px;
   right: 0;
   display: flex;
@@ -39,17 +39,27 @@
   transition: all 0.1s ease-in-out;
 }
 
+.Filters-box-filters {
+  display: flex;
+  justify-content: space-between;
+}
+
 .Filters-box.visible {
   visibility: visible;
   opacity: 1;
 }
 
 .Filter-group {
-  margin: 4px 0;
+  margin: 4px 0 0 0;
+  padding-left: 15px;
   align-self: flex-end;
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.Filter-group input {
+  margin-left: 20px;
 }
 
 .Filters-apply-button {
