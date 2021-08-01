@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import './styles.css';
 
-export const CountryCard = ({ id, name, continent, image }) => {
+const CountryCard = ({ id, name, continent, image }) => {
   return (
     <article className="CountryCard">
       <img src={image} alt={name} />
@@ -18,3 +18,5 @@ export const CountryCard = ({ id, name, continent, image }) => {
     </article>
   );
 };
+
+export default CountryCard;

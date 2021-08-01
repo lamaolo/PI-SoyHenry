@@ -9,29 +9,14 @@ import './styles.css';
 
 const Filters = ({ filterByContinent, filterByPopulation }) => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
-  const [selectedContinents, setSelectedContinents] = useState();
+  const [continentFilter, setContinentFilter] = useState('Todos');
   const [populationFilter, setPopulationFilter] = useState('Ninguno');
-
-  const handleCheckboxClick = (e) => {
-    setSelectedContinents({
-      ...selectedContinents,
-      [e.target.name]: e.target.checked,
-    });
-  };
 
   const handleApplyFilters = (e) => {
     setIsFilterVisible(false);
-    const filters = [];
 
-    for (const key in selectedContinents) {
-      if (selectedContinents[key]) filters.push(key);
-    }
-
-    if (populationFilter !== 'Ninguno') {
-      filterByPopulation(populationFilter);
-    }
-
-    filterByContinent(filters);
+    filterByPopulation(populationFilter);
+    filterByContinent(continentFilter);
   };
 
   return (
@@ -61,8 +46,8 @@ const Filters = ({ filterByContinent, filterByPopulation }) => {
             setPopulationFilter={setPopulationFilter}
           />
           <FilterContinent
-            selectedContinents={selectedContinents}
-            handleCheckboxClick={handleCheckboxClick}
+            continentFilter={continentFilter}
+            setContinentFilter={setContinentFilter}
           />
         </div>
         <div

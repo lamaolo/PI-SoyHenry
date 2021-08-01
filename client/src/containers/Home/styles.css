@@ -7,7 +7,6 @@
 .Home-header {
   padding: 20px;
   height: 80px;
-  margin-bottom: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,6 +27,7 @@
 }
 
 .Home-countries-error {
+  margin-top: 30px;
   width: 100%;
   padding: 10px 20px;
   background: rgb(255, 64, 64);

@@ -7,7 +7,7 @@ const FilterPopulation = ({ populationFilter, setPopulationFilter }) => {
 
   return (
     <div className="Filters-box-continent">
-      <b>Poblacion</b>
+      <b>Población</b>
       <div className="Filter-group">
         <label htmlFor="Ascendiente">Asc.</label>
         <input

@@ -3,7 +3,8 @@ const initialState = {
   countryDetail: {},
   filteredCountries: [],
   filter: {
-    continent: [],
+    continent: null,
+    order: null,
   },
   error: '',
 };
@@ -18,68 +19,53 @@ const reducers = (state = initialState, action) => {
       };
     }
     case 'FILTER_COUNTRIES_BY_NAME': {
-      if (state.filter.continent.length) {
-        const filteredCountries = action.payload.filter((country) =>
-          state.filter.continent.includes(country.continent)
-        );
-
-        if (filteredCountries.length) {
-          return {
-            ...state,
-            filteredCountries: action.payload.filter((country) =>
-              state.filter.continent.includes(country.continent)
-            ),
-            error: '',
-          };
-        } else {
-          return {
-            ...state,
-            filteredCountries: [],
-            error: `No se encontró ningun pais con el nombre ingresado en los continentes ${state.filter.continent.join(
-              ', '
-            )}.`,
-          };
-        }
-      } else {
-        return {
-          ...state,
-          filteredCountries: action.payload,
-          error: '',
-        };
-      }
+      return {
+        ...state,
+        countries: action.payload,
+        error: '',
+      };
     }
     case 'FILTER_COUNTRIES_BY_POPULATION': {
       if (action.payload === 'Descendiente') {
         return {
           ...state,
-          filteredCountries: state.countries.sort((a, b) =>
-            a.population > b.population ? 1 : -1
-          ),
+          filter: {
+            ...state.filter,
+            order: 'desc',
+          },
+          error: null,
         };
-      } else {
+      } else if (action.payload === 'Ascendiente') {
         return {
           ...state,
-          filteredCountries: state.countries.sort((a, b) =>
-            a.population < b.population ? 1 : -1
-          ),
+          filter: {
+            ...state.filter,
+            order: 'asc',
+          },
+          error: null,
         };
       }
-    }
-    case '404_COUNTRIES_NAME': {
+
       return {
         ...state,
-        error: `No se ha encontrado ningun pais con el nombre "${action.payload}".`,
+        filter: {
+          ...state.filter,
+          order: null,
+        },
+      };
+    }
+    case 'SET_ERROR': {
+      return {
+        ...state,
+        error: action.payload,
       };
     }
     case 'FILTER_COUNTRIES_BY_CONTINENT': {
       return {
         ...state,
-        filteredCountries: state.countries.filter((country) =>
-          action.payload.includes(country.continent)
-        ),
         filter: {
           ...state.filter,
-          continent: action.payload,
+          continent: action.payload === 'Todos' ? false : action.payload,
         },
         error: '',
       };

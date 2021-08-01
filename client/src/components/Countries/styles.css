@@ -1,0 +1,40 @@
+.Countries-continent {
+  margin: 30px 0;
+  color: white;
+  font-size: 3.6rem;
+  filter: drop-shadow(1px 1px 0 var(--amarillo));
+}
+
+.Countries-error {
+  width: 100%;
+  padding: 20px;
+  background: rgb(255, 64, 64);
+  border-radius: 8px;
+  color: white;
+}
+
+.Countries-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+.Countries-active-filters svg {
+  margin: 0;
+  width: 25px;
+  color: var(--amarillo);
+}
+
+.Countries-active-filters {
+  padding: 10px;
+  background-color: black;
+  display: flex;
+}
+
+.Countries-active-filters p {
+  margin-right: 15px;
+  font-size: 2rem;
+  color: var(--amarillo);
+  font-weight: bold;
+}

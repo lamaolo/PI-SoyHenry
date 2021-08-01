@@ -4,12 +4,12 @@ import { useEffect } from 'react';
 
 import Search from '../../components/Search';
 import Filters from '../../components/Filters';
-import { CountryCard } from '../../components/CountryCard';
+import Countries from '../../components/Countries';
 import { fetchCountries } from '../../actions';
 
 import './styles.css';
 
-const Home = ({ fetchCountries, countries, error, filteredCountries }) => {
+const Home = ({ fetchCountries, error }) => {
   useEffect(() => {
     fetchCountries();
   }, []);
@@ -18,11 +18,9 @@ const Home = ({ fetchCountries, countries, error, filteredCountries }) => {
     <div className="Home">
       <header className="Home-header">
         <Search />
-        <div className="Home-header-filters">
-          <Filters />
-        </div>
+        <Filters />
       </header>
-      <main className="Home-countries">
+      <main>
         {error ? (
           <div className="Home-countries-error">
             <svg
@@ -41,30 +39,8 @@ const Home = ({ fetchCountries, countries, error, filteredCountries }) => {
             </svg>
             <h2>{error}</h2>
           </div>
-        ) : filteredCountries.length ? (
-          filteredCountries
-            .slice(0, 18)
-            .map(({ id, image, continent, name }) => (
-              <CountryCard
-                key={id}
-                id={id}
-                image={image}
-                continent={continent}
-                name={name}
-              />
-            ))
         ) : (
-          countries
-            .slice(0, 18)
-            .map(({ id, image, continent, name }) => (
-              <CountryCard
-                key={id}
-                id={id}
-                image={image}
-                continent={continent}
-                name={name}
-              />
-            ))
+          <Countries />
         )}
       </main>
     </div>
@@ -77,8 +53,6 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    countries: state.countries,
-    filteredCountries: state.filteredCountries,
     error: state.error,
   };
 };
