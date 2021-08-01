@@ -1,21 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchProducts } from '../../actions';
-import { CountryCard } from '../../components/CountryCard';
+
 import Search from '../../components/Search';
+import Filters from '../../components/Filters';
+import { CountryCard } from '../../components/CountryCard';
+import { fetchCountries } from '../../actions';
 
 import './styles.css';
 
-const Home = ({ fetchProducts, countries, error }) => {
+const Home = ({ fetchCountries, countries, error, filteredCountries }) => {
   useEffect(() => {
-    fetchProducts();
+    fetchCountries();
   }, []);
 
   return (
     <div className="Home">
       <header className="Home-header">
         <Search />
+        <div className="Home-header-filters">
+          <Filters />
+        </div>
       </header>
       <main className="Home-countries">
         {error ? (
@@ -36,9 +41,21 @@ const Home = ({ fetchProducts, countries, error }) => {
             </svg>
             <h2>{error}</h2>
           </div>
+        ) : filteredCountries.length ? (
+          filteredCountries
+            .slice(0, 18)
+            .map(({ id, image, continent, name }) => (
+              <CountryCard
+                key={id}
+                id={id}
+                image={image}
+                continent={continent}
+                name={name}
+              />
+            ))
         ) : (
           countries
-            .slice(0, 9)
+            .slice(0, 18)
             .map(({ id, image, continent, name }) => (
               <CountryCard
                 key={id}
@@ -55,12 +72,13 @@ const Home = ({ fetchProducts, countries, error }) => {
 };
 
 const mapDispatchToProps = {
-  fetchProducts,
+  fetchCountries,
 };
 
 const mapStateToProps = (state) => {
   return {
     countries: state.countries,
+    filteredCountries: state.filteredCountries,
     error: state.error,
   };
 };

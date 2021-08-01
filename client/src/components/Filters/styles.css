@@ -1,0 +1,68 @@
+.Filters {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 5px;
+  background: white !important;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.493);
+  font-size: 1.8rem;
+}
+
+.Filters svg {
+  width: 20px;
+  margin-left: 8px;
+  transition: all 0.1s ease-in-out;
+}
+
+.Filters svg.rotate {
+  transform: rotate(180deg);
+}
+
+.Filters-box {
+  padding: 20px;
+  position: absolute;
+  height: 300px;
+  width: 200px;
+  bottom: -310px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.493);
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.1s ease-in-out;
+}
+
+.Filters-box.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.Filter-group {
+  margin: 4px 0;
+  align-self: flex-end;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Filters-apply-button {
+  width: 100%;
+  align-self: flex-end;
+}
+
+@keyframes showFilters {
+  0% {
+    display: flex;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,9 @@
+.Filters-box-continent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.Filters-box-continent b {
+  margin-bottom: 5px;
+}

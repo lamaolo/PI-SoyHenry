@@ -11,7 +11,6 @@ const Search = ({ filterName }) => {
     e.preventDefault();
 
     filterName(value);
-    // setValue('');
   };
 
   return (

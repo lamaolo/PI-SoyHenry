@@ -3,6 +3,10 @@ import axios from 'axios';
 const BASE_API = 'http://localhost:3001/api';
 
 export const filterName = (payload) => {
+  // return {
+  //   type: 'FILTER_COUNTRIES_BY_NAME',
+  //   payload,
+  // };
   return (dispatch) => {
     axios(`${BASE_API}/countries?name=${payload}`)
       .then(({ data: { data } }) => {
@@ -12,7 +16,12 @@ export const filterName = (payload) => {
   };
 };
 
-export const fetchProducts = () => {
+export const filterByContinent = (payload) => ({
+  type: 'FILTER_COUNTRIES_BY_CONTINENT',
+  payload,
+});
+
+export const fetchCountries = () => {
   return (dispatch) => {
     axios(`${BASE_API}/countries`)
       .then(({ data: { data } }) =>

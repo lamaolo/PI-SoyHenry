@@ -10,8 +10,14 @@
   margin-bottom: 40px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: var(--amarillo);
   border-radius: 8px;
+}
+
+.Home-header-filters {
+  display: flex;
+  align-items: center;
 }
 
 .Home-countries {
