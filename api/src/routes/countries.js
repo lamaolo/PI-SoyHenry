@@ -3,7 +3,6 @@ const axios = require("axios");
 const { Sequelize } = require("sequelize");
 
 const { Country } = require("../db");
-
 const API_BASE = process.env.API;
 
 //?name=abc
@@ -15,7 +14,7 @@ router.get("/", (req, res, next) => {
       where: Sequelize.where(
         Sequelize.fn("LOWER", Sequelize.col("name")),
         "LIKE",
-        `%${name.toLowerCase()}%`
+        `${name.toLowerCase()}%`
       ),
     })
       .then((countries) => {
@@ -47,19 +46,19 @@ router.get("/", (req, res, next) => {
                 population: country.population,
               }));
 
-              Country.bulkCreate(mappedCountries)
+              Country.bulkCreate(mappedCountries);
 
               // mappedCountries.forEach((c) => {
               //   Country.create(c);
               // });
 
-              console.log("Respondiendo con data de la API")
+              console.log("Respondiendo con data de la API");
               res.json({ data: mappedCountries, error: null });
             })
             .catch((error) => next({ message: error.message, status: 500 }));
-          } else {
-            // Si ya tengo la info en la DB; devuelvo esa info.
-            console.log("Respondiendo con data de la DB")
+        } else {
+          // Si ya tengo la info en la DB; devuelvo esa info.
+          console.log("Respondiendo con data de la DB");
           res.json({ data: countries, error: null });
         }
       })
@@ -77,6 +76,23 @@ router.get("/:idPais", (req, res, next) => {
       res.json({ data: pais, error: null });
     }
   });
+});
+
+//type = asc || desc
+router.get("/filter/population/:type", (req, res, next) => {
+  const { type } = req.params;
+
+  if (type.toUpperCase() !== "ASC" && type.toUpperCase() !== "DESC") {
+    next({ message: "El tipo debe ser ASC o DESC.", status: 400 });
+  }
+
+  Country.findAll({
+    order: [["population", type.toUpperCase()]],
+  })
+    .then((countries) => {
+      res.json({ data: countries, error: null });
+    })
+    .catch((error) => next({ message: error.message, status: 500 }));
 });
 
 module.exports = router;
