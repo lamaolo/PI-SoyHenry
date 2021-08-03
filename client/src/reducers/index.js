@@ -1,33 +1,41 @@
 const initialState = {
   countries: [],
   countryDetail: {},
+  activities: [],
   filter: {
-    continent: "Todos",
-    order: "Desc",
-    filter: "Alfabéticamente",
+    continent: 'Todos',
+    order: 'Desc',
+    filter: 'Alfabéticamente',
+    activity: 'Todas',
   },
-  error: "",
+  error: '',
   loading: true,
 };
 
 const reducers = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_COUNTRIES": {
+    case 'SET_COUNTRIES': {
       return {
         ...state,
         countries: action.payload,
-        error: "",
+        error: '',
         loading: false,
       };
     }
-    case "FILTER_COUNTRIES_BY_NAME": {
+    case 'FETCH_ACTIVITIES': {
+      return {
+        ...state,
+        activities: action.payload,
+      };
+    }
+    case 'FILTER_COUNTRIES_BY_NAME': {
       return {
         ...state,
         countries: action.payload,
-        error: "",
+        error: '',
       };
     }
-    case "SET_FILTERS": {
+    case 'SET_FILTERS': {
       return {
         ...state,
         filter: {
@@ -36,29 +44,29 @@ const reducers = (state = initialState, action) => {
         },
       };
     }
-    case "SET_ERROR": {
+    case 'SET_ERROR': {
       return {
         ...state,
         error: action.payload,
       };
     }
-    case "FILTER_COUNTRIES_BY_CONTINENT": {
+    case 'FILTER_COUNTRIES_BY_CONTINENT': {
       return {
         ...state,
         filter: {
           ...state.filter,
-          continent: action.payload === "Todos" ? false : action.payload,
+          continent: action.payload === 'Todos' ? false : action.payload,
         },
-        error: "",
+        error: '',
       };
     }
-    case "SET_COUNTRY_DETAIL": {
+    case 'SET_COUNTRY_DETAIL': {
       return {
         ...state,
         countryDetail: action.payload,
       };
     }
-    case "REMOVE_COUNTRY_DETAIL": {
+    case 'REMOVE_COUNTRY_DETAIL': {
       return {
         ...state,
         countryDetail: {},

@@ -21,6 +21,19 @@ export const filterName = (payload) => {
   };
 };
 
+export const fetchActivities = () => {
+  return (dispatch) => {
+    axios(`${BASE_API}/activities`)
+      .then(({ data: { data } }) => {
+        dispatch({ type: 'FETCH_ACTIVITIES', payload: data });
+      })
+      .catch((error) => {
+        console.error('ERROR: ', error);
+        dispatch(setError('Ha ocurrido un error inesperado.'));
+      });
+  };
+};
+
 export const createActivity = (payload, setIsButtonDisabled) => {
   return (dispatch) => {
     axios

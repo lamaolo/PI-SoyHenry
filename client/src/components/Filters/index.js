@@ -7,11 +7,13 @@ import { setFilters } from '../../actions';
 
 import './styles.css';
 
-const Filters = ({ setFilters }) => {
+const Filters = ({ activities, setFilters }) => {
+  const [isActivitiesVisible, setIsActivitiesVisible] = useState(false);
   const [isContinentVisible, setIsContinentVisible] = useState(false);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [isOrderVisible, setIsOrderVisible] = useState(false);
 
+  const [activity, setActivity] = useState('Todas');
   const [continent, setContinent] = useState('Todos');
   const [filter, setFilter] = useState('Alfabéticamente');
   const [order, setOrder] = useState('Desc');
@@ -31,12 +33,24 @@ const Filters = ({ setFilters }) => {
     setContinent(e.target.dataset.value);
   };
 
+  const handleActivity = (e) => {
+    setIsActivitiesVisible(false);
+    setActivity(e.target.dataset.value);
+  };
+
   useEffect(() => {
-    setFilters({ continent, order, filter });
-  }, [continent, order, filter]);
+    setFilters({ continent, order, filter, activity });
+  }, [continent, order, filter, activity]);
 
   return (
     <div className="Filters-container">
+      <Filter
+        isVisible={isActivitiesVisible}
+        setIsVisible={setIsActivitiesVisible}
+        name={activity}
+        handler={handleActivity}
+        values={['Todas', ...activities.map(({ name }) => name)]}
+      />
       <Filter
         isVisible={isContinentVisible}
         setIsVisible={setIsContinentVisible}
@@ -62,6 +76,10 @@ const Filters = ({ setFilters }) => {
   );
 };
 
-export default connect(null, {
+const mapStateToProps = (state) => ({
+  activities: state.activities,
+});
+
+export default connect(mapStateToProps, {
   setFilters,
 })(Filters);

@@ -19,8 +19,16 @@ router.post("/", (req, res, next) => {
     duration,
   })
     .then((createdActivity) => {
-      createdActivity.setCountries(countries.map(c => c.toUpperCase()))
+      createdActivity.setCountries(countries.map((c) => c.toUpperCase()));
       res.json({ data: createdActivity, error: null });
+    })
+    .catch((error) => next({ message: error.message, status: 500 }));
+});
+
+router.get("/", (req, res, next) => {
+  Activity.findAll()
+    .then((activities) => {
+      res.json({ data: activities, error: null });
     })
     .catch((error) => next({ message: error.message, status: 500 }));
 });

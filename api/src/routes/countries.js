@@ -11,11 +11,16 @@ router.get("/", (req, res, next) => {
 
   if (name) {
     Country.findAll({
-      where: Sequelize.where(
-        Sequelize.fn("LOWER", Sequelize.col("name")),
-        "LIKE",
-        `${name.toLowerCase()}%`
-      ),
+      where: {
+        "country.name": Sequelize.where(
+          Sequelize.fn("LOWER", Sequelize.col("country.name")),
+          "LIKE",
+          name.toLowerCase() + "%"
+        ),
+      },
+      include: {
+        model: Activity,
+      },
     })
       .then((countries) => {
         if (!countries.length) {
@@ -29,7 +34,9 @@ router.get("/", (req, res, next) => {
       })
       .catch((error) => next({ message: error.message, status: 500 }));
   } else {
-    Country.findAll()
+    Country.findAll({
+      include: Activity,
+    })
       .then((countries) => {
         if (!countries.length) {
           axios(`${API_BASE}/all`)

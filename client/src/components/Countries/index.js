@@ -9,7 +9,7 @@ import { setError } from '../../actions';
 
 import './styles.css';
 
-const Countries = ({ countries, filter, setError }) => {
+const Countries = ({ countries, filter, error, setError }) => {
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [countriesToShow, setCountriesToShow] = useState([0, 9]);
 
@@ -23,6 +23,18 @@ const Countries = ({ countries, filter, setError }) => {
     filter.continent !== 'Todos'
       ? (toFilter = countries.filter((c) => c.continent === filter.continent))
       : (toFilter = countries);
+
+    if (filter.activity !== 'Todas') {
+      const filteredActivities = [];
+
+      toFilter.forEach((country) => {
+        country.activities.forEach((a) => {
+          if (a.name === filter.activity) filteredActivities.push(country);
+        });
+      });
+
+      toFilter = filteredActivities;
+    }
 
     if (filter.filter === 'Población') {
       if (filter.order === 'Asc') {
@@ -44,11 +56,13 @@ const Countries = ({ countries, filter, setError }) => {
 
     if (!toFilter.length) {
       setError('No se ha encontrado ningún pais con los filtros establecidos.');
+    } else {
+      setError('');
     }
 
     setFilteredCountries(toFilter);
     setCountriesToShow([0, 9]);
-  }, [filter, countries]);
+  }, [filter, countries, filter.continent]);
 
   const handleChangePange = (e) => {
     setCountriesToShow(() => [
@@ -84,17 +98,40 @@ const Countries = ({ countries, filter, setError }) => {
         </Link>
       </div>
       <div className="Home-countries">
-        {filteredCountries
-          .slice(countriesToShow[0], countriesToShow[1])
-          .map((country) => (
-            <CountryCard
-              key={country.id}
-              id={country.id}
-              image={country.image}
-              continent={country.continent}
-              name={country.name}
-            />
-          ))}
+        {error ? (
+          <div className="Home-countries-error">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <h2>
+              <b>WHAAT? </b>
+              {error}
+            </h2>
+          </div>
+        ) : (
+          filteredCountries
+            .slice(countriesToShow[0], countriesToShow[1])
+            .map((country) => (
+              <CountryCard
+                key={country.id}
+                id={country.id}
+                image={country.image}
+                continent={country.continent}
+                name={country.name}
+              />
+            ))
+        )}
       </div>
       <div className="Page-buttons">
         {Array(Math.ceil(filteredCountries.length / 9))
@@ -120,6 +157,7 @@ const mapStateToProps = (state) => {
   return {
     countries: state.countries,
     filter: state.filter,
+    error: state.error,
   };
 };
 
