@@ -2,7 +2,7 @@ const router = require("express").Router();
 const axios = require("axios");
 const { Sequelize } = require("sequelize");
 
-const { Country } = require("../db");
+const { Country, Activity } = require("../db");
 const API_BASE = process.env.API;
 
 //?name=abc
@@ -69,7 +69,12 @@ router.get("/", (req, res, next) => {
 router.get("/:idPais", (req, res, next) => {
   const { idPais } = req.params;
 
-  Country.findByPk(idPais.toUpperCase()).then((pais) => {
+  Country.findOne({
+    where: {
+      id: idPais.toUpperCase(),
+    },
+    include: Activity,
+  }).then((pais) => {
     if (!pais) {
       next({ message: "No existe pais con ese ID.", status: 404 });
     } else {

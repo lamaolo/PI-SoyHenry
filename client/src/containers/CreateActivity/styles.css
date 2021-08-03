@@ -1,0 +1,95 @@
+.CreateActivity {
+  max-width: 1300px;
+  padding: 20px;
+  margin: 50px auto;
+  color: white;
+  background: black;
+  box-shadow: var(--amarillo) 7px 7px;
+  border: 1px solid var(--amarillo);
+}
+
+.CreateActivity-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.CreateActivity-header h1 {
+  margin: 0;
+  font-size: 4rem;
+}
+
+.CreateActivity-body {
+  margin-top: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group label {
+  font-size: 2rem;
+  color: var(--amarillo);
+  font-weight: bold;
+}
+
+.form-group select {
+  margin-top: 10px;
+}
+
+.form-group input {
+  margin-top: 10px;
+  background: none;
+  border: 1px solid var(--amarillo);
+  padding: 8px 10px;
+  font-size: 1.8rem;
+  color: white;
+  outline: none;
+  width: 100%;
+  max-width: 350px;
+  transition: all 0.15s ease;
+}
+
+.form-group input:focus {
+  box-shadow: 3px 3px 0 var(--amarillo);
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.Countries-to-add {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.country-to-add {
+  margin: 5px 8px 5px 0;
+  background-color: var(--amarillo);
+  font-size: 1.5rem;
+  padding: 5px 8px;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+}
+
+.success-message {
+  display: flex;
+  max-width: 335px;
+  padding: 5px 10px;
+  background: rgb(43, 187, 30);
+  border-radius: 8px;
+  color: white;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.success-message p {
+  margin: 0;
+}
+
+.success-message svg {
+  width: 20px;
+}

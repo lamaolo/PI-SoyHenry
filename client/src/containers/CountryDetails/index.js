@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
-import { connect } from "react-redux";
-import { setCountryDetail } from "../../actions";
-import { Link } from "react-router-dom";
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { setCountryDetail } from '../../actions';
+import { Link } from 'react-router-dom';
 
-import "./styles.css";
+import './styles.css';
 
 const CountryDetails = ({ match, setCountryDetail, countryDetail, error }) => {
   useEffect(() => {
@@ -88,6 +88,16 @@ const CountryDetails = ({ match, setCountryDetail, countryDetail, error }) => {
                   <b>Población: </b>
                   <p>{countryDetail.population}.</p>
                 </div>
+                {countryDetail.activities?.length ? (
+                  <div className="country-details-body-item activities">
+                    <b>Actividades disponibles: </b>
+                    <ul>
+                      {countryDetail.activities.map((activity) => (
+                        <li key={activity.id}>{activity.name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
               </section>
             </div>
           </div>

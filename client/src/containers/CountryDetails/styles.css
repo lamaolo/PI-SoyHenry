@@ -8,7 +8,7 @@
 .CountryDetails-container {
   padding: 20px;
   border: 1px solid var(--amarillo);
-  border-radius: 8px;
+  /* border-radius: 8px; */
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@
 }
 
 .CountryDetails-container:hover {
-  box-shadow: var(--amarillo) 8px 10px;
+  box-shadow: var(--amarillo) 10px 10px;
 }
 
 .goback {
@@ -53,7 +53,7 @@
   padding-right: 20px;
   border-right: 2px solid var(--amarillo);
   border-radius: 8px 0 0 8px;
-  height: 450px;
+  min-height: 450px;
   object-fit: cover;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .country-details-header h1:after {
-  content: "";
+  content: '';
   position: absolute;
   width: 60%;
   height: 8px;
@@ -92,7 +92,7 @@
 }
 
 .country-details-header h2::before {
-  content: "|";
+  content: '|';
   margin-right: 20px;
   font-size: 3rem;
 }
@@ -110,4 +110,20 @@
 
 .country-details-body-item p {
   margin: 0 0 0 10px;
+}
+
+.activities {
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 15px;
+  border-top: 1px solid var(--amarillo);
+}
+
+.activities ul {
+  margin: 10px 0 0 0;
+  padding-top: 0;
+}
+
+.activities ul li {
+  padding: 5px 0;
 }
