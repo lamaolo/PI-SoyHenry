@@ -1,66 +1,67 @@
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import FilterContinent from '../FilterContinent';
-import FilterPopulation from '../FilterPopulation';
-import { filterByContinent, filterByPopulation } from '../../actions';
+import Filter from '../Filter';
+import { setFilters } from '../../actions';
 
 import './styles.css';
 
-const Filters = ({ filterByContinent, filterByPopulation }) => {
+const Filters = ({ setFilters }) => {
+  const [isContinentVisible, setIsContinentVisible] = useState(false);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
-  const [continentFilter, setContinentFilter] = useState('Todos');
-  const [populationFilter, setPopulationFilter] = useState('Ninguno');
+  const [isOrderVisible, setIsOrderVisible] = useState(false);
 
-  const handleApplyFilters = (e) => {
+  const [continent, setContinent] = useState('Todos');
+  const [filter, setFilter] = useState('Alfabéticamente');
+  const [order, setOrder] = useState('Desc');
+
+  const handleFilter = (e) => {
     setIsFilterVisible(false);
-
-    filterByPopulation(populationFilter);
-    filterByContinent(continentFilter);
+    setFilter(e.target.dataset.value);
   };
 
+  const handleOrder = (e) => {
+    setIsOrderVisible(false);
+    setOrder(e.target.dataset.value);
+  };
+
+  const handleContinent = (e) => {
+    setIsContinentVisible(false);
+    setContinent(e.target.dataset.value);
+  };
+
+  useEffect(() => {
+    setFilters({ continent, order, filter });
+  }, [continent, order, filter]);
+
   return (
-    <button
-      className="Filters unstyled-btn"
-      onClick={() => setIsFilterVisible(!isFilterVisible)}
-    >
-      Filtros
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className={`${isFilterVisible ? 'rotate' : ''}`}
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M19 9l-7 7-7-7"
-        />
-      </svg>
-      <div className={`Filters-box ${isFilterVisible && 'visible'}`}>
-        <div className="Filters-box-filters">
-          <FilterPopulation
-            populationFilter={populationFilter}
-            setPopulationFilter={setPopulationFilter}
-          />
-          <FilterContinent
-            continentFilter={continentFilter}
-            setContinentFilter={setContinentFilter}
-          />
-        </div>
-        <div
-          onClick={handleApplyFilters}
-          className="main-btn Filters-apply-button"
-        >
-          Aplicar
-        </div>
-      </div>
-    </button>
+    <div className="Filters-container">
+      <Filter
+        isVisible={isContinentVisible}
+        setIsVisible={setIsContinentVisible}
+        name={continent}
+        handler={handleContinent}
+        values={['Todos', 'Americas', 'Europe', 'Asia', 'Oceania', 'Polar']}
+      />
+      <Filter
+        isVisible={isFilterVisible}
+        setIsVisible={setIsFilterVisible}
+        name={filter}
+        handler={handleFilter}
+        values={['Alfabéticamente', 'Población']}
+      />
+      <Filter
+        isVisible={isOrderVisible}
+        setIsVisible={setIsOrderVisible}
+        name={order}
+        handler={handleOrder}
+        values={['Asc', 'Desc']}
+      />
+    </div>
   );
 };
 
-export default connect(null, { filterByContinent, filterByPopulation })(
-  Filters
-);
+export default connect(null, {
+  setFilters,
+})(Filters);

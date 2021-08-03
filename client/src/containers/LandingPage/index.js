@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './styles.css';
 import logo from '../../static/img/countries.png';
 
-export const LandingPage = () => {
+const LandingPage = () => {
   return (
     <div className="container">
       <main className="LandingPage">
@@ -34,3 +34,5 @@ export const LandingPage = () => {
     </div>
   );
 };
+
+export default LandingPage;

@@ -38,3 +38,32 @@
   color: var(--amarillo);
   font-weight: bold;
 }
+
+.Page-buttons {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.Page-buttons button {
+  margin: 8px;
+  width: 50px;
+  transition: all 0.15s ease-in-out;
+}
+
+.Page-buttons .filter-btn {
+  background: black;
+  color: white;
+  border: 1px solid var(--amarillo);
+}
+
+.Page-buttons .filter-btn:hover {
+  background-color: var(--amarillo);
+  color: black;
+}
+
+.filter-btn.active {
+  background: var(--amarillo);
+  color: black;
+}

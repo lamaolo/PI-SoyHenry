@@ -5,11 +5,12 @@ import { useEffect } from 'react';
 import Search from '../../components/Search';
 import Filters from '../../components/Filters';
 import Countries from '../../components/Countries';
+
 import { fetchCountries } from '../../actions';
 
 import './styles.css';
 
-const Home = ({ fetchCountries, error }) => {
+const Home = ({ error, fetchCountries, loading }) => {
   useEffect(() => {
     fetchCountries();
   }, []);
@@ -21,7 +22,9 @@ const Home = ({ fetchCountries, error }) => {
         <Filters />
       </header>
       <main>
-        {error ? (
+        {loading ? (
+          <div className="loading-css"></div>
+        ) : error ? (
           <div className="Home-countries-error">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +40,10 @@ const Home = ({ fetchCountries, error }) => {
                 d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <h2>{error}</h2>
+            <h2>
+              <b>WHAAT? </b>
+              {error}
+            </h2>
           </div>
         ) : (
           <Countries />
@@ -47,14 +53,11 @@ const Home = ({ fetchCountries, error }) => {
   );
 };
 
-const mapDispatchToProps = {
-  fetchCountries,
-};
-
 const mapStateToProps = (state) => {
   return {
     error: state.error,
+    loading: state.loading,
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, { fetchCountries })(Home);

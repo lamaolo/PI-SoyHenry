@@ -1,73 +1,67 @@
 const initialState = {
   countries: [],
   countryDetail: {},
-  filteredCountries: [],
   filter: {
-    continent: null,
-    order: null,
+    continent: "Todos",
+    order: "Desc",
+    filter: "Alfabéticamente",
   },
-  error: '',
+  error: "",
+  loading: true,
 };
 
 const reducers = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_COUNTRIES': {
+    case "SET_COUNTRIES": {
       return {
         ...state,
         countries: action.payload,
-        error: '',
+        error: "",
+        loading: false,
       };
     }
-    case 'FILTER_COUNTRIES_BY_NAME': {
+    case "FILTER_COUNTRIES_BY_NAME": {
       return {
         ...state,
         countries: action.payload,
-        error: '',
+        error: "",
       };
     }
-    case 'FILTER_COUNTRIES_BY_POPULATION': {
-      if (action.payload === 'Descendiente') {
-        return {
-          ...state,
-          filter: {
-            ...state.filter,
-            order: 'desc',
-          },
-          error: null,
-        };
-      } else if (action.payload === 'Ascendiente') {
-        return {
-          ...state,
-          filter: {
-            ...state.filter,
-            order: 'asc',
-          },
-          error: null,
-        };
-      }
-
+    case "SET_FILTERS": {
       return {
         ...state,
         filter: {
           ...state.filter,
-          order: null,
+          ...action.payload,
         },
       };
     }
-    case 'SET_ERROR': {
+    case "SET_ERROR": {
       return {
         ...state,
         error: action.payload,
       };
     }
-    case 'FILTER_COUNTRIES_BY_CONTINENT': {
+    case "FILTER_COUNTRIES_BY_CONTINENT": {
       return {
         ...state,
         filter: {
           ...state.filter,
-          continent: action.payload === 'Todos' ? false : action.payload,
+          continent: action.payload === "Todos" ? false : action.payload,
         },
-        error: '',
+        error: "",
+      };
+    }
+    case "SET_COUNTRY_DETAIL": {
+      return {
+        ...state,
+        countryDetail: action.payload,
+      };
+    }
+    case "REMOVE_COUNTRY_DETAIL": {
+      return {
+        ...state,
+        countryDetail: {},
       };
     }
     default: {

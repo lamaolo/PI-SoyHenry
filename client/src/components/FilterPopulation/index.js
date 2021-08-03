@@ -15,7 +15,7 @@ const FilterPopulation = ({ populationFilter, setPopulationFilter }) => {
           type="radio"
           name="filterpopulation"
           id="Ascendiente"
-          value="Ascendiente"
+          value="asc"
         />
       </div>
 
@@ -26,7 +26,7 @@ const FilterPopulation = ({ populationFilter, setPopulationFilter }) => {
           type="radio"
           name="filterpopulation"
           id="Descendiente"
-          value="Descendiente"
+          value="desc"
         />
       </div>
 
