@@ -9,9 +9,9 @@ const LandingPage = () => {
       <main className="LandingPage">
         <header className="LandingPage-header">
           <h1>PI Countries</h1>
-          <img src={logo} alt="Countries" />
+          <img src={logo} alt="Countries Logo" />
         </header>
-        <Link to="/home" style={{ textDecoration: 'none' }}>
+        <Link to="/home" className="unstyled-link">
           <button className="main-btn LandingPage-button">
             <strong>Ingresar</strong>
             <svg

@@ -1,0 +1,18 @@
+.Error {
+  margin-top: 30px;
+  width: 100%;
+  padding: 10px 20px;
+  background: rgb(255, 64, 64);
+  border-radius: 8px;
+  display: flex;
+}
+
+.Error svg {
+  width: 25px;
+  margin-right: 8px;
+  color: white;
+}
+
+.Error h2 {
+  color: white;
+}

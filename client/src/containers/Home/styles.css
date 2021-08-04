@@ -26,25 +26,6 @@
   flex-wrap: wrap;
 }
 
-.Home-countries-error {
-  margin-top: 30px;
-  width: 100%;
-  padding: 10px 20px;
-  background: rgb(255, 64, 64);
-  border-radius: 8px;
-  display: flex;
-}
-
-.Home-countries-error svg {
-  width: 25px;
-  margin-right: 8px;
-  color: white;
-}
-
-.Home-countries-error h2 {
-  color: white;
-}
-
 .loading-css {
   margin: 100px auto;
   width: 80px;

@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import "./styles.css";
+import './styles.css';
 
 const CountryCard = ({ id, name, continent, image }) => {
   return (
@@ -8,7 +8,7 @@ const CountryCard = ({ id, name, continent, image }) => {
       <img src={image} alt={name} />
       <div className="CountryCard-name">
         <h1>{name}</h1>
-        <p>{continent}</p>
+        <p>{continent || 'Sin continente'}</p>
       </div>
       <div className="CountryCard-action">
         <Link className="unstyled-link" to={`/country/${id.toLowerCase()}`}>
