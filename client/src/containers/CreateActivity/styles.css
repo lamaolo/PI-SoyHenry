@@ -1,6 +1,7 @@
 .CreateActivity {
-  max-width: 1300px;
-  padding: 20px;
+  margin: 0 auto;
+  width: 500px;
+  padding: 40px;
   margin: 50px auto;
   color: white;
   background: black;
@@ -48,7 +49,6 @@
   color: white;
   outline: none;
   width: 100%;
-  max-width: 350px;
   transition: all 0.15s ease;
 }
 
@@ -62,6 +62,7 @@
 
 .Countries-to-add {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 20px;
 }
 
@@ -69,9 +70,16 @@
   margin: 5px 8px 5px 0;
   background-color: var(--amarillo);
   font-size: 1.5rem;
-  padding: 5px 8px;
+  padding: 5px 10px 5px 8px;
   border-radius: 5px;
   color: black;
+  font-weight: bold;
+}
+
+.country-to-add button {
+  padding: 0;
+  margin: 0 8px 0 5px;
+  color: red;
   font-weight: bold;
 }
 

@@ -134,20 +134,21 @@ const Countries = ({ countries, filter, error, setError }) => {
         )}
       </div>
       <div className="Page-buttons">
-        {Array(Math.ceil(filteredCountries.length / 9))
-          .fill(1)
-          .map((_, i) => (
-            <button
-              onClick={handleChangePange}
-              data-value={i + 1}
-              key={i}
-              className={`main-btn filter-btn ${
-                countriesToShow[0] === i * 9 && 'active'
-              }`}
-            >
-              {i + 1}
-            </button>
-          ))}
+        {!error &&
+          Array(Math.ceil(filteredCountries.length / 9))
+            .fill(1)
+            .map((_, i) => (
+              <button
+                onClick={handleChangePange}
+                data-value={i + 1}
+                key={i}
+                className={`main-btn filter-btn ${
+                  countriesToShow[0] === i * 9 && 'active'
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
       </div>
     </>
   );

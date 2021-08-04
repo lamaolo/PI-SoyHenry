@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import { fetchCountries, createActivity } from '../../actions';
+import { fetchCountries, createActivity, setError } from '../../actions';
 
 import './styles.css';
 
@@ -11,15 +11,11 @@ const CreateActivity = ({
   countries,
   fetchCountries,
   createActivity,
+  setError,
   error,
 }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
-
-  useEffect(() => {
-    fetchCountries();
-  }, []);
-
   const [values, setValues] = useState({
     name: '',
     difficulty: '',
@@ -28,9 +24,19 @@ const CreateActivity = ({
     countries: [],
   });
 
+  useEffect(() => {
+    fetchCountries();
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsButtonDisabled(true);
+
+    if (!values.countries.length) {
+      setIsButtonDisabled(false);
+      return setError('Debes seleccionar al menos un pais.');
+    }
+
     createActivity(values, setIsButtonDisabled);
 
     if (!error) {
@@ -48,6 +54,14 @@ const CreateActivity = ({
 
   const handleChange = (e) => {
     setSuccessMessage('');
+    if (e.target.name === 'difficulty') {
+      if (e.target.value > 5) {
+        e.target.value = 5;
+      } else if (e.target.value < 1) {
+        e.target.value = '';
+      }
+    }
+
     setValues({
       ...values,
       [e.target.name]: e.target.value,
@@ -56,12 +70,22 @@ const CreateActivity = ({
 
   const handleAddCountries = (event) => {
     if (!event.nativeEvent.inputType) {
-      console.log(event.target.value);
-      setValues({
-        ...values,
-        countries: [...values.countries, event.target.value],
-      });
+      setError('');
+      if (!values.countries.find((c) => c === event.target.value)) {
+        setValues({
+          ...values,
+          countries: [...values.countries, event.target.value],
+        });
+      }
+      event.target.value = '';
     }
+  };
+
+  const handleRemoveCountry = (id) => {
+    setValues({
+      ...values,
+      countries: values.countries.filter((c) => c !== id),
+    });
   };
 
   const clear = (e) => {
@@ -120,11 +144,11 @@ const CreateActivity = ({
           />
         </div>
         <div className="form-group">
-          <label htmlFor="duration">Duración</label>
+          <label htmlFor="duration">Duración (minutos)</label>
           <input
             value={values.duration}
             onChange={handleChange}
-            type="text"
+            type="number"
             name="duration"
             id="duration"
             required
@@ -139,6 +163,7 @@ const CreateActivity = ({
             onChange={handleChange}
             name="season"
             id="season"
+            required
           >
             <option value="Verano">Verano</option>
             <option value="Otoño">Otoño</option>
@@ -158,7 +183,9 @@ const CreateActivity = ({
           />
           <datalist id="countries">
             {countries.map((country) => (
-              <option value={country.id}>{country.name}</option>
+              <option key={country.id} value={country.id}>
+                {country.name}
+              </option>
             ))}
           </datalist>
         </div>
@@ -166,7 +193,15 @@ const CreateActivity = ({
           {countries
             .filter((c) => values.countries.includes(c.id))
             .map((country) => (
-              <p className="country-to-add">{country.name}</p>
+              <p key={country.name} className="country-to-add">
+                <button
+                  onClick={() => handleRemoveCountry(country.id)}
+                  className="unstyled-btn"
+                >
+                  X
+                </button>
+                {country.name}
+              </p>
             ))}
         </div>
         <div className="form-group">
@@ -194,10 +229,7 @@ const CreateActivity = ({
                 d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <h2>
-              <b>WHAAT? </b>
-              {error}
-            </h2>
+            <h2>{error}</h2>
           </div>
         ) : (
           successMessage && (
@@ -232,6 +264,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchCountries, createActivity })(
-  CreateActivity
-);
+export default connect(mapStateToProps, {
+  fetchCountries,
+  createActivity,
+  setError,
+})(CreateActivity);
