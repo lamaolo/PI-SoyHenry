@@ -7,11 +7,7 @@ import { Link } from 'react-router-dom';
 import CountryCard from '../CountryCard';
 import Error from '../Error';
 import { setError } from '../../actions';
-import {
-  filterActivity,
-  filterAlphabetically,
-  filterPopulation,
-} from '../../lib/filters';
+import { filterActivity, sort } from '../../lib/filters';
 
 import './styles.css';
 
@@ -20,7 +16,7 @@ const Countries = ({ countries, filter, error, setError }) => {
   const [countriesToShow, setCountriesToShow] = useState([0, 9]);
 
   useEffect(() => {
-    let toFilter = countries;
+    let toFilter = [];
 
     filter.continent !== 'Todos'
       ? (toFilter = countries.filter((c) => c.continent === filter.continent))
@@ -30,11 +26,10 @@ const Countries = ({ countries, filter, error, setError }) => {
       toFilter = filterActivity(toFilter, filter.activity);
     }
 
-    if (filter.filter === 'Población') {
-      toFilter = filterPopulation(toFilter, filter.order);
-    } else if (filter.filter === 'Alfabéticamente') {
-      toFilter = filterAlphabetically(toFilter, filter.order);
-    }
+    toFilter = sort(toFilter, {
+      order: filter.order,
+      property: filter.filter === 'Población' ? 'population' : 'name',
+    });
 
     if (!toFilter.length) {
       setError('No se ha encontrado ningún pais con los filtros establecidos.');
@@ -46,7 +41,7 @@ const Countries = ({ countries, filter, error, setError }) => {
     setCountriesToShow([0, 9]);
   }, [filter, countries, filter.continent]);
 
-  const handleChangePange = (e) => {
+  const handleChangePage = (e) => {
     setCountriesToShow(() => [
       (e.target.dataset.value - 1) * 9,
       e.target.dataset.value * 9,
@@ -102,7 +97,7 @@ const Countries = ({ countries, filter, error, setError }) => {
             .fill(1)
             .map((_, i) => (
               <button
-                onClick={handleChangePange}
+                onClick={handleChangePage}
                 data-value={i + 1}
                 key={i}
                 className={`main-btn filter-btn ${

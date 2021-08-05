@@ -10,18 +10,22 @@ export const filterActivity = (array, activity) => {
   return filteredActivities;
 };
 
-export const filterAlphabetically = (array, order) => {
-  if (order === 'Asc') {
-    return array.sort((a, b) => b.name.localeCompare(a.name));
-  } else {
-    return array.sort((a, b) => a.name.localeCompare(b.name));
+export const sort = (array, { order, property }) => {
+  if (property === 'population') {
+    order === 'Asc' ? (order = 'Desc') : (order = 'Asc');
   }
-};
 
-export const filterPopulation = (array, order) => {
   if (order === 'Asc') {
-    return array.sort((a, b) => (a.population > b.population ? 1 : -1));
+    return array.sort((a, b) =>
+      b[property].toString().localeCompare(a[property].toString(), 0, {
+        numeric: typeof a[property] === 'number',
+      })
+    );
   } else {
-    return array.sort((a, b) => (a.population < b.population ? 1 : -1));
+    return array.sort((a, b) =>
+      a[property].toString().localeCompare(b[property].toString(), 0, {
+        numeric: typeof a[property] === 'number',
+      })
+    );
   }
 };
