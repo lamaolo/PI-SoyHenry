@@ -7,6 +7,8 @@ import Error from '../../components/Error';
 import { fetchCountries, createActivity, setError } from '../../actions';
 
 import './styles.css';
+import FormGroup from '../../components/FormGroup';
+import Dropdown from '../../components/Dropdown';
 
 const CreateActivity = ({
   countries,
@@ -16,6 +18,7 @@ const CreateActivity = ({
   error,
 }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [values, setValues] = useState({
     name: '',
@@ -89,6 +92,13 @@ const CreateActivity = ({
     });
   };
 
+  const handleDropDownChange = (e) => {
+    setValues({
+      ...values,
+      season: e.target.dataset.value,
+    });
+  };
+
   const clear = (e) => {
     e.target.value = '';
   };
@@ -116,63 +126,55 @@ const CreateActivity = ({
         <h1>Crear actividad</h1>
       </header>
       <form onSubmit={handleSubmit} className="CreateActivity-body">
-        <div className="form-group">
-          <label htmlFor="name">Nombre</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            autoComplete="off"
-            value={values.name}
-            onChange={handleChange}
-            placeholder="Escribe el nombre de la actividad..."
+        <FormGroup
+          showName="Nombre"
+          value={values.name}
+          handleChange={handleChange}
+          attributes={{
+            name: 'name',
+            type: 'text',
+            placeholder: 'Escribe el nombre de la actividad',
+            required: true,
+          }}
+        />
+        <FormGroup
+          showName="Dificultad (1 - 5)"
+          value={values.difficulty}
+          handleChange={handleChange}
+          attributes={{
+            name: 'difficulty',
+            type: 'number',
+            placeholder: 'Escribe el nivel de dificultad',
+            max: 5,
+            min: 1,
+            required: true,
+          }}
+        />
+        <FormGroup
+          showName="Duración (minutos)"
+          value={values.duration}
+          handleChange={handleChange}
+          attributes={{
+            name: 'duration',
+            type: 'number',
+            placeholder: 'Escribe la duración en minutos',
+            required: true,
+          }}
+        />
+
+        <div className="Form-group">
+          <label>Temporada</label>
+          <Dropdown
+            isVisible={isDropdownOpen}
+            setIsVisible={setIsDropdownOpen}
+            name={values.season}
+            handler={handleDropDownChange}
+            values={['Verano', 'Otoño', 'Invierno', 'Primavera']}
+            theme="dark"
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="difficulty">Dificultad (1 - 5)</label>
-          <input
-            type="number"
-            value={values.difficulty}
-            onChange={handleChange}
-            max={5}
-            name="difficulty"
-            min={1}
-            id="difficulty"
-            required
-            autoComplete="off"
-            placeholder="Escribe el nivel de dificultad..."
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="duration">Duración (minutos)</label>
-          <input
-            value={values.duration}
-            onChange={handleChange}
-            type="number"
-            name="duration"
-            id="duration"
-            required
-            autoComplete="off"
-            placeholder="Escribe la duracion..."
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="season">Temporada</label>
-          <select
-            value={values.season}
-            onChange={handleChange}
-            name="season"
-            id="season"
-            required
-          >
-            <option value="Verano">Verano</option>
-            <option value="Otoño">Otoño</option>
-            <option value="Invierno">Invierno</option>
-            <option value="Primavera">Primavera</option>
-          </select>
-        </div>
-        <div className="form-group">
+
+        <div className="Form-group">
           <label htmlFor="countries">Paises</label>
           <input
             onChange={handleAddCountries}

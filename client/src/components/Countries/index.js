@@ -7,6 +7,11 @@ import { Link } from 'react-router-dom';
 import CountryCard from '../CountryCard';
 import Error from '../Error';
 import { setError } from '../../actions';
+import {
+  filterActivity,
+  filterAlphabetically,
+  filterPopulation,
+} from '../../lib/filters';
 
 import './styles.css';
 
@@ -15,44 +20,20 @@ const Countries = ({ countries, filter, error, setError }) => {
   const [countriesToShow, setCountriesToShow] = useState([0, 9]);
 
   useEffect(() => {
-    setFilteredCountries(countries);
-  }, [countries]);
-
-  useEffect(() => {
-    let toFilter = [];
+    let toFilter = countries;
 
     filter.continent !== 'Todos'
       ? (toFilter = countries.filter((c) => c.continent === filter.continent))
       : (toFilter = countries);
 
     if (filter.activity !== 'Todas') {
-      const filteredActivities = [];
-
-      toFilter.forEach((country) => {
-        country.activities.forEach((a) => {
-          if (a.name === filter.activity) filteredActivities.push(country);
-        });
-      });
-
-      toFilter = filteredActivities;
+      toFilter = filterActivity(toFilter, filter.activity);
     }
 
     if (filter.filter === 'Población') {
-      if (filter.order === 'Asc') {
-        toFilter = [...toFilter].sort((a, b) =>
-          a.population > b.population ? 1 : -1
-        );
-      } else {
-        toFilter = [...toFilter].sort((a, b) =>
-          a.population < b.population ? 1 : -1
-        );
-      }
+      toFilter = filterPopulation(toFilter, filter.order);
     } else if (filter.filter === 'Alfabéticamente') {
-      if (filter.order === 'Asc') {
-        toFilter = [...toFilter].sort((a, b) => b.name.localeCompare(a.name));
-      } else {
-        toFilter = [...toFilter].sort((a, b) => a.name.localeCompare(b.name));
-      }
+      toFilter = filterAlphabetically(toFilter, filter.order);
     }
 
     if (!toFilter.length) {

@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import Filter from '../Filter';
+import Dropdown from '../Dropdown';
 import { setFilters } from '../../actions';
 
 import './styles.css';
@@ -44,33 +44,41 @@ const Filters = ({ activities, setFilters }) => {
 
   return (
     <div className="Filters-container">
-      <Filter
+      <Dropdown
         isVisible={isActivitiesVisible}
         setIsVisible={setIsActivitiesVisible}
         name={activity}
+        filterName="Actividades"
         handler={handleActivity}
         values={['Todas', ...activities.map(({ name }) => name)]}
+        theme="light"
       />
-      <Filter
+      <Dropdown
         isVisible={isContinentVisible}
         setIsVisible={setIsContinentVisible}
         name={continent}
+        filterName="Continente"
         handler={handleContinent}
         values={['Todos', 'Americas', 'Europe', 'Asia', 'Oceania', 'Polar']}
+        theme="light"
       />
-      <Filter
+      <Dropdown
         isVisible={isFilterVisible}
         setIsVisible={setIsFilterVisible}
         name={filter}
+        filterName="Filtro"
         handler={handleFilter}
         values={['Alfabéticamente', 'Población']}
+        theme="light"
       />
-      <Filter
+      <Dropdown
         isVisible={isOrderVisible}
         setIsVisible={setIsOrderVisible}
         name={order}
+        filterName="Orden"
         handler={handleOrder}
         values={['Asc', 'Desc']}
+        theme="light"
       />
     </div>
   );

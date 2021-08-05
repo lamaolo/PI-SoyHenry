@@ -1,0 +1,35 @@
+.Form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Form-group label {
+  margin-bottom: 10px;
+  font-size: 2rem;
+  color: var(--amarillo);
+  font-weight: bold;
+}
+
+.Form-group select {
+  margin-top: 10px;
+}
+
+.Form-group input {
+  background: none;
+  border: 1px solid var(--amarillo);
+  padding: 8px 10px;
+  font-size: 1.8rem;
+  color: white;
+  outline: none;
+  width: 100%;
+  transition: all 0.15s ease;
+}
+
+.Form-group input:focus {
+  box-shadow: 3px 3px 0 var(--amarillo);
+}
+
+.Form-group:last-child {
+  margin-bottom: 0;
+}

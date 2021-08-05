@@ -1,18 +1,19 @@
 import './styles.css';
 
-const Filter = ({
+const Dropdown = ({
   isVisible,
   setIsVisible,
   name,
   filterName,
   handler,
   values,
+  theme,
 }) => {
   return (
-    <div className="Filter-container">
-      <p className="Filter-name">{filterName}</p>
+    <div className="Dropdown-container">
+      {filterName && <p className="Dropdown-name">{filterName}</p>}
       <div
-        className="Filters unstyled-btn"
+        className={`Dropdown unstyled-btn ${theme}`}
         onClick={() => setIsVisible(!isVisible)}
       >
         {name}
@@ -30,13 +31,13 @@ const Filter = ({
             d="M19 9l-7 7-7-7"
           />
         </svg>
-        <div className={`Filters-box ${isVisible && 'visible'}`}>
-          {values.map((value, index) => (
+        <div className={`Dropdown-box ${isVisible && 'visible'}`}>
+          {values.map((value) => (
             <p
               onClick={handler}
-              key={index}
+              key={value}
               data-value={value}
-              className="Filter"
+              className="Dropdown-option"
             >
               {value}
             </p>
@@ -47,4 +48,4 @@ const Filter = ({
   );
 };
 
-export default Filter;
+export default Dropdown;

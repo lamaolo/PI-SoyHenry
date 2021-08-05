@@ -6,7 +6,7 @@
 
 .Home-header {
   padding: 20px;
-  height: 80px;
+  /* height: auto; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,7 +16,7 @@
 
 .Home-header-filters {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .Home-countries {
