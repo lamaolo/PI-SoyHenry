@@ -41,8 +41,8 @@ describe("Country model", () => {
           .then(() => {
             done();
           })
-          .catch((error) => {
-            done(error);
+          .catch(() => {
+            done("Deberia haberse creado");
           });
       });
 
@@ -58,7 +58,7 @@ describe("Country model", () => {
           population: 43590400,
         })
           .then(() => {
-            done("ID must be a three characters string");
+            done("No deberia haberse creado");
           })
           .catch(() => {
             done();
