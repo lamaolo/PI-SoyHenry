@@ -19,13 +19,6 @@
   align-items: flex-end;
 }
 
-.Home-countries {
-  display: flex;
-  justify-content: space-around;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
 .loading-css {
   margin: 100px auto;
   width: 80px;

@@ -207,7 +207,7 @@ const CreateActivity = ({
               </p>
             ))}
         </div>
-        <div className="form-group">
+        <div className="Form-group">
           <button
             disabled={isButtonDisabled}
             type="submit"

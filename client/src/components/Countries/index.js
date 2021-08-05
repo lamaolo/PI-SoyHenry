@@ -79,7 +79,7 @@ const Countries = ({ countries, filter, error, setError }) => {
           </button>
         </Link>
       </div>
-      <div className="Home-countries">
+      <div className="Countries-list">
         {error ? (
           <Error />
         ) : (

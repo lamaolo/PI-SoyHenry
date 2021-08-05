@@ -48,6 +48,13 @@
   font-weight: bold;
 }
 
+.Countries-list {
+  display: flex;
+  justify-content: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
 .Page-buttons {
   margin-top: 25px;
   display: flex;
