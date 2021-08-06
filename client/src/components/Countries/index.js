@@ -39,7 +39,7 @@ const Countries = ({ countries, filter, error, setError }) => {
 
     setFilteredCountries(toFilter);
     setCountriesToShow([0, 9]);
-  }, [filter, countries, filter.continent]);
+  }, [filter, countries]);
 
   const handleChangePage = (e) => {
     setCountriesToShow(() => [
