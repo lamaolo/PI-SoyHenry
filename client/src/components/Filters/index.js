@@ -59,7 +59,15 @@ const Filters = ({ activities, setFilters }) => {
         name={continent}
         filterName="Continente"
         handler={handleContinent}
-        values={['Todos', 'Americas', 'Europe', 'Asia', 'Oceania', 'Polar']}
+        values={[
+          'Todos',
+          'Africa',
+          'Americas',
+          'Asia',
+          'Europe',
+          'Oceania',
+          'Polar',
+        ]}
         theme="light"
       />
       <Dropdown

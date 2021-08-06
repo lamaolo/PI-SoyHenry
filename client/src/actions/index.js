@@ -34,17 +34,22 @@ export const fetchActivities = () => {
   };
 };
 
-export const createActivity = (payload, setIsButtonDisabled) => {
+export const createActivity = (
+  payload,
+  setIsButtonDisabled,
+  setSuccessMessage
+) => {
   return (dispatch) => {
     axios
       .post(`${BASE_API}/activities`, payload)
       .then(() => {
         setIsButtonDisabled(false);
+        dispatch(setError(''));
+        setSuccessMessage('Actividad creada correctamente');
       })
-      .catch(() => {
-        dispatch(
-          setError('Ha ocurrido un error inesperado creando la actividad')
-        );
+      .catch((error) => {
+        dispatch(setError(error.response.data.error || 'Error interno'));
+        setIsButtonDisabled(false);
       });
   };
 };
@@ -87,6 +92,13 @@ export const fetchCountries = () => {
       .then(({ data: { data } }) =>
         dispatch({ type: 'SET_COUNTRIES', payload: data })
       )
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        dispatch(
+          setError(
+            'Ha ocurrido un error inesperado mientras se cargaban los paises.'
+          )
+        );
+      });
   };
 };

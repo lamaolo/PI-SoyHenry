@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import Error from '../../components/Error';
+import FormGroup from '../../components/FormGroup';
+import Dropdown from '../../components/Dropdown';
 import { fetchCountries, createActivity, setError } from '../../actions';
 
 import './styles.css';
-import FormGroup from '../../components/FormGroup';
-import Dropdown from '../../components/Dropdown';
 
 const CreateActivity = ({
   countries,
@@ -32,6 +32,18 @@ const CreateActivity = ({
     fetchCountries();
   }, []);
 
+  useEffect(() => {
+    if (successMessage) {
+      setValues({
+        name: '',
+        difficulty: '',
+        duration: '',
+        season: 'Verano',
+        countries: [],
+      });
+    }
+  }, [successMessage]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsButtonDisabled(true);
@@ -41,19 +53,7 @@ const CreateActivity = ({
       return setError('Debes seleccionar al menos un pais.');
     }
 
-    createActivity(values, setIsButtonDisabled);
-
-    if (!error) {
-      setSuccessMessage('Actividad creada correctamente');
-    }
-
-    setValues({
-      name: '',
-      difficulty: '',
-      duration: '',
-      season: 'Verano',
-      countries: [],
-    });
+    createActivity(values, setIsButtonDisabled, setSuccessMessage);
   };
 
   const handleChange = (e) => {
