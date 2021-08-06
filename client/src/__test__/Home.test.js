@@ -1,153 +1,82 @@
+/* eslint-disable jest/valid-describe */
 import React from 'react';
-// import { configure, mount } from 'enzyme';
-// import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { Provider } from 'react-redux';
-import { applyMiddleware, compose, createStore } from 'redux';
-import reducer from '../reducers';
-
-import Home from '../containers/Home';
-import Countries from '../components/Countries';
-import CountryCard from '../components/CountryCard';
+import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
-import thunk from 'redux-thunk';
-import { MemoryRouter } from 'react-router';
+import { Router, Route } from 'react-router-dom';
 
-// configure({ adapter: new Adapter() });
+import CountryDetails from '../containers/CountryDetails';
+import store from '../store';
 
-let store;
-describe('<Home />', () => {
-  beforeEach(() => {
-    store = createTestStore();
+// describe('<CountryDetails />', () => {
+//   const history = createMemoryHistory();
+
+//   it('Deberia renderizar el pais que tiene como ID el paremtro ID de la URL.', async () => {
+//     history.push('/country/arg');
+//     let { findByText } = render(
+//       <Provider store={store}>
+//         <MemoryRouter initialEntries={['/country/arg']}>
+//           <CountryDetails match={{ params: { id: 'arg' } }} />
+//         </MemoryRouter>
+//       </Provider>
+//     );
+
+//     expect(await findByText('Argentina')).toBeInTheDocument();
+//   });
+// });
+
+describe('<CountryDetails />', () => {
+  it('Deberia renderizar Argentina cuando le pasamos por query params el ID de ese pais', async () => {
+    let wrapper = renderWithRouterMatch(CountryDetails, {
+      route: '/country/arg',
+      path: '/country/:id',
+    });
+    expect(await wrapper.findByText('Argentina')).toBeInTheDocument();
+    expect(await wrapper.findByText('Americas.')).toBeInTheDocument();
+    expect(await wrapper.findByText('Buenos Aires.')).toBeInTheDocument();
+    expect(await wrapper.findByText('South America.')).toBeInTheDocument();
+
+    // Renderiza la imagen correcta de la bandera
+    const displayedImage = document.querySelector('img');
+    expect(displayedImage.src).toContain('arg.svg');
   });
 
-  it('Should render the search input', () => {
-    let wrapper = render(
-      <Provider store={store}>
-        <MemoryRouter initialEntries={['/']}>
-          <Home />
-        </MemoryRouter>
-      </Provider>
-    );
+  it('Deberia renderizar España cuando le pasamos por query params el ID de ese pais', async () => {
+    let wrapper = renderWithRouterMatch(CountryDetails, {
+      route: '/country/esp',
+      path: '/country/:id',
+    });
+    expect(await wrapper.findByText('Spain')).toBeInTheDocument();
+    expect(await wrapper.findByText('Europe.')).toBeInTheDocument();
+    expect(await wrapper.findByText('Madrid.')).toBeInTheDocument();
+    expect(await wrapper.findByText('Southern Europe.')).toBeInTheDocument();
 
-    expect(
-      wrapper.getByPlaceholderText('Busca un pais...')
-    ).toBeInTheDocument();
+    // Renderiza la imagen correcta de la bandera
+    const displayedImage = document.querySelector('img');
+    expect(displayedImage.src).toContain('esp.svg');
+  });
+
+  it('Deberia renderizar un botón para volver al Home sin recargar la página', () => {
+    let wrapper = renderWithRouterMatch(CountryDetails, {
+      route: '/country/jpn',
+      path: '/country/:id',
+    });
+
+    const button = document.querySelector('a.goback');
+
+    expect(button).toBeTruthy();
+    expect(button.href).toContain('/home');
   });
 });
 
-function createTestStore() {
-  const store = createStore(
-    reducer,
-    mockState,
-    compose(applyMiddleware(thunk))
+export function renderWithRouterMatch(ui, { path, route }) {
+  const history = createMemoryHistory({ initialEntries: [route] });
+
+  return render(
+    <Provider store={store}>
+      <Router history={history}>
+        <Route path={path} component={ui} />
+      </Router>
+    </Provider>
   );
-  return store;
 }
-
-const mockState = {
-  countries: [
-    {
-      id: 'AFG',
-      name: 'Afghanistan',
-      image: 'https://restcountries.eu/data/afg.svg',
-      continent: 'Asia',
-      capital: 'Kabul',
-      subregion: 'Southern Asia',
-      area: 652230,
-      population: 27657145,
-    },
-    {
-      id: 'ALA',
-      name: 'Åland Islands',
-      image: 'https://restcountries.eu/data/ala.svg',
-      continent: 'Europe',
-      capital: 'Mariehamn',
-      subregion: 'Northern Europe',
-      area: 1580,
-      population: 28875,
-    },
-    {
-      id: 'ALB',
-      name: 'Albania',
-      image: 'https://restcountries.eu/data/alb.svg',
-      continent: 'Europe',
-      capital: 'Tirana',
-      subregion: 'Southern Europe',
-      area: 28748,
-      population: 2886026,
-    },
-    {
-      id: 'DZA',
-      name: 'Algeria',
-      image: 'https://restcountries.eu/data/dza.svg',
-      continent: 'Africa',
-      capital: 'Algiers',
-      subregion: 'Northern Africa',
-      area: 2381741,
-      population: 40400000,
-    },
-    {
-      id: 'ASM',
-      name: 'American Samoa',
-      image: 'https://restcountries.eu/data/asm.svg',
-      continent: 'Oceania',
-      capital: 'Pago Pago',
-      subregion: 'Polynesia',
-      area: 199,
-      population: 57100,
-    },
-    {
-      id: 'AND',
-      name: 'Andorra',
-      image: 'https://restcountries.eu/data/and.svg',
-      continent: 'Europe',
-      capital: 'Andorra la Vella',
-      subregion: 'Southern Europe',
-      area: 468,
-      population: 78014,
-    },
-    {
-      id: 'AGO',
-      name: 'Angola',
-      image: 'https://restcountries.eu/data/ago.svg',
-      continent: 'Africa',
-      capital: 'Luanda',
-      subregion: 'Middle Africa',
-      area: 1246700,
-      population: 25868000,
-    },
-    {
-      id: 'AIA',
-      name: 'Anguilla',
-      image: 'https://restcountries.eu/data/aia.svg',
-      continent: 'Americas',
-      capital: 'The Valley',
-      subregion: 'Caribbean',
-      area: 91,
-      population: 13452,
-    },
-    {
-      id: 'ATA',
-      name: 'Antarctica',
-      image: 'https://restcountries.eu/data/ata.svg',
-      continent: 'Polar',
-      capital: '',
-      subregion: '',
-      area: 14000000,
-      population: 1000,
-    },
-  ],
-  countryDetail: {},
-  activities: [],
-  filter: {
-    continent: 'Todos',
-    order: 'Desc',
-    filter: 'Alfabéticamente',
-    activity: 'Todas',
-  },
-  error: '',
-  loading: true,
-};
-
-// container = shallow(<Countries />);
-// expect(container.find(CountryCard)).toHaveLength(9);
