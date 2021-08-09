@@ -22,6 +22,10 @@ module.exports = (sequelize) => {
       values: ["Verano", "Otoño", "Invierno", "Primavera"],
       allowNull: false,
     },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     duration: {
       type: DataTypes.STRING,
       allowNull: false,
