@@ -1,16 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import Error from '../../components/Error';
 import { setLoading, fetchActivity } from '../../actions';
 
 import './styles.css';
-import primavera from '../../static/img/primavera.png';
-import verano from '../../static/img/verano.png';
-import invierno from '../../static/img/invierno.png';
-import otono from '../../static/img/otono.png';
 
 const Activity = ({ activity, error, loading, fetchActivity, setLoading }) => {
   const { id } = useParams();

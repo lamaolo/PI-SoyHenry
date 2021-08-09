@@ -1,0 +1,16 @@
+.FixedHeader-container {
+  background-color: var(--amarillo);
+}
+
+.FixedHeader {
+  padding: 10px 20px;
+  margin: 0 auto;
+  max-width: 1300px;
+}
+
+.FixedHeader a {
+  font-size: 2.5rem;
+  margin: 0;
+  color: black;
+  font-weight: bold;
+}

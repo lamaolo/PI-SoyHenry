@@ -9,6 +9,7 @@ import Countries from '../../components/Countries';
 import { fetchCountries, fetchActivities } from '../../actions';
 
 import './styles.css';
+import FixedHeader from '../../components/FixedHeader';
 
 const Home = ({ fetchCountries, fetchActivities, loading }) => {
   useEffect(() => {
