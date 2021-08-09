@@ -7,6 +7,11 @@ export const setError = (payload) => ({
   payload,
 });
 
+export const setLoading = (payload) => ({
+  type: 'SET_LOADING',
+  payload,
+});
+
 export const filterName = (payload) => {
   return (dispatch) => {
     axios(`${BASE_API}/countries?name=${payload}`)
@@ -18,6 +23,21 @@ export const filterName = (payload) => {
           setError(`No se encontró ningún pais con el nombre "${payload}"`)
         )
       );
+  };
+};
+
+export const fetchActivity = (payload) => {
+  return (dispatch) => {
+    axios(`${BASE_API}/activities/${payload}`)
+      .then(({ data: { data } }) => {
+        dispatch(setLoading(false));
+        dispatch({ type: 'SET_ACITIVTY', payload: data });
+      })
+      .catch(() => {
+        dispatch(
+          setError('No se encontró ninguna actividad con el ID especificado.')
+        );
+      });
   };
 };
 

@@ -15,7 +15,8 @@
   margin-top: 10px;
 }
 
-.Form-group input {
+.Form-group input,
+textarea {
   background: none;
   border: 1px solid var(--amarillo);
   padding: 8px 10px;
@@ -23,6 +24,7 @@
   color: white;
   outline: none;
   width: 100%;
+  resize: none;
   transition: all 0.15s ease;
 }
 

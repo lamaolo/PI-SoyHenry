@@ -8,6 +8,7 @@ const initialState = {
     filter: 'Alfabéticamente',
     activity: 'Todas',
   },
+  activityDetail: {},
   error: '',
   loading: true,
 };
@@ -26,6 +27,12 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         activities: action.payload,
+      };
+    }
+    case 'SET_ACITIVTY': {
+      return {
+        ...state,
+        activityDetail: action.payload,
       };
     }
     case 'FILTER_COUNTRIES_BY_NAME': {
@@ -70,6 +77,12 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         countryDetail: {},
+      };
+    }
+    case 'SET_LOADING': {
+      return {
+        ...state,
+        loading: action.payload,
       };
     }
     default: {

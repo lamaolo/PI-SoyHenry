@@ -1,24 +1,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import Error from '../../components/Error';
 import { setCountryDetail } from '../../actions';
 
 import './styles.css';
 
-const CountryDetails = ({ match, setCountryDetail, countryDetail, error }) => {
+const CountryDetails = (
+  { match, setCountryDetail, countryDetail, error },
+  props
+) => {
+  const history = useHistory();
+
   useEffect(() => {
     setCountryDetail(match.params.id);
+    console.log(props.history);
 
     return () => setCountryDetail(null);
   }, []);
 
+  const goBack = () => {
+    history.goBack();
+  };
+
   return (
     <div className="CountryDetails">
       <div className="CountryDetails-container">
-        <Link className="goback unstyled-link" to="/home">
+        <button onClick={goBack} className="goback  unstyled-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -34,7 +44,7 @@ const CountryDetails = ({ match, setCountryDetail, countryDetail, error }) => {
             />
           </svg>
           Volver
-        </Link>
+        </button>
         {error ? (
           <Error />
         ) : (
@@ -75,7 +85,28 @@ const CountryDetails = ({ match, setCountryDetail, countryDetail, error }) => {
                     <b>Actividades disponibles: </b>
                     <ul>
                       {countryDetail.activities.map((activity) => (
-                        <li key={activity.id}>{activity.name}</li>
+                        <li key={activity.id}>
+                          <Link
+                            to={`/activity/${activity.id}`}
+                            className="unstyled-link"
+                          >
+                            {activity.name}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                              />
+                            </svg>
+                          </Link>
+                        </li>
                       ))}
                     </ul>
                   </div>

@@ -8,7 +8,6 @@
 .CountryDetails-container {
   padding: 20px;
   border: 1px solid var(--amarillo);
-  /* border-radius: 8px; */
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -32,6 +31,8 @@
   font-size: 1.6rem;
   transition: all 0.15s ease-in-out;
   box-shadow: var(--amarillo) 0 0;
+  background: none;
+  cursor: pointer;
 }
 
 .goback:hover {
@@ -126,4 +127,14 @@
 
 .activities ul li {
   padding: 5px 0;
+}
+
+.activities ul li a {
+  color: white;
+}
+
+.activities ul li svg {
+  width: 20px;
+  margin-left: 10px;
+  cursor: pointer;
 }

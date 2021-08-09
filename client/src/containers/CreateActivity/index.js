@@ -24,6 +24,7 @@ const CreateActivity = ({
     name: '',
     difficulty: '',
     duration: '',
+    description: '',
     season: 'Verano',
     countries: [],
   });
@@ -38,6 +39,7 @@ const CreateActivity = ({
         name: '',
         difficulty: '',
         duration: '',
+        description: '',
         season: 'Verano',
         countries: [],
       });
@@ -58,6 +60,7 @@ const CreateActivity = ({
 
   const handleChange = (e) => {
     setSuccessMessage('');
+
     if (e.target.name === 'difficulty') {
       if (e.target.value > 5) {
         e.target.value = 5;
@@ -172,6 +175,20 @@ const CreateActivity = ({
             values={['Verano', 'Otoño', 'Invierno', 'Primavera']}
             theme="dark"
           />
+        </div>
+
+        <div className="Form-group">
+          <label htmlFor="description">Descripción de la actividad</label>
+          <textarea
+            name="description"
+            id="description"
+            required
+            placeholder="Describe tu actividad..."
+            cols="30"
+            rows="4"
+            onChange={handleChange}
+            value={values.description}
+          ></textarea>
         </div>
 
         <div className="Form-group">
