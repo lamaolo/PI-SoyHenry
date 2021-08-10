@@ -4,6 +4,10 @@
   margin: 0 auto;
 }
 
+.Home-main {
+  min-height: 730px;
+}
+
 .Home-header {
   padding: 20px;
   display: flex;

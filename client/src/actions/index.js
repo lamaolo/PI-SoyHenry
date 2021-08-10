@@ -26,6 +26,21 @@ export const filterName = (payload) => {
   };
 };
 
+export const updateActivity = (payload, id, refresh) => {
+  return (dispatch) => {
+    axios
+      .patch(`${BASE_API}/activities/${id}`, payload)
+      .then(() => {
+        refresh();
+      })
+      .catch((error) => dispatch(setError(error.message)));
+  };
+};
+
+export const removeActivityDetail = () => ({
+  type: 'REMOVE_ACTIVITY_DETAIL',
+});
+
 export const fetchActivity = (payload) => {
   return (dispatch) => {
     axios(`${BASE_API}/activities/${payload}`)

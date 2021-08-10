@@ -56,6 +56,9 @@
 }
 
 .Page-buttons {
+  position: sticky;
+  bottom: 0;
+  top: 951px;
   margin-top: 25px;
   display: flex;
   justify-content: center;

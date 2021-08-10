@@ -88,6 +88,7 @@
   flex-basis: 100%;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.35);
   overflow: hidden;
+  transition: all 0.15s ease-in-out;
 }
 
 .Activity-body-card > * {
@@ -206,6 +207,7 @@
   place-items: center;
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.473);
+  transition: all 0.15s ease-in-out;
 }
 
 .Activity-countries-card-hover:hover {

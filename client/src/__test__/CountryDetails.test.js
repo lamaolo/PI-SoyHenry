@@ -56,20 +56,19 @@ describe('<CountryDetails />', () => {
     expect(displayedImage.src).toContain('esp.svg');
   });
 
-  it('Deberia renderizar un botón para volver al Home sin recargar la página', () => {
+  it('Deberia renderizar un botón para volver a la pagina anterior sin recargar la página', () => {
     let wrapper = renderWithRouterMatch(CountryDetails, {
       route: '/country/jpn',
       path: '/country/:id',
     });
 
-    const button = document.querySelector('a.goback');
+    const goBackButton = document.querySelector('button.goback');
 
-    expect(button).toBeTruthy();
-    expect(button.href).toContain('/home');
+    expect(goBackButton).toBeTruthy();
   });
 });
 
-export function renderWithRouterMatch(ui, { path, route }) {
+function renderWithRouterMatch(ui, { path, route }) {
   const history = createMemoryHistory({ initialEntries: [route] });
 
   return render(

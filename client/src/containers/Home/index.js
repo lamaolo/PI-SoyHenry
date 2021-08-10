@@ -9,7 +9,6 @@ import Countries from '../../components/Countries';
 import { fetchCountries, fetchActivities } from '../../actions';
 
 import './styles.css';
-import FixedHeader from '../../components/FixedHeader';
 
 const Home = ({ fetchCountries, fetchActivities, loading }) => {
   useEffect(() => {
@@ -23,7 +22,7 @@ const Home = ({ fetchCountries, fetchActivities, loading }) => {
         <Search />
         <Filters />
       </header>
-      <main>
+      <main className="Home-main">
         {loading ? <div className="loading-css"></div> : <Countries />}
       </main>
     </div>

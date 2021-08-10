@@ -79,6 +79,12 @@ const reducers = (state = initialState, action) => {
         countryDetail: {},
       };
     }
+    case 'REMOVE_ACTIVITY_DETAIL': {
+      return {
+        ...state,
+        activityDetail: {},
+      };
+    }
     case 'SET_LOADING': {
       return {
         ...state,

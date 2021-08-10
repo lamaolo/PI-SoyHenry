@@ -1,32 +1,42 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import Error from '../../components/Error';
-import { setLoading, fetchActivity } from '../../actions';
+import { setLoading, fetchActivity, removeActivityDetail } from '../../actions';
 
 import './styles.css';
+import EditingActivity from '../../components/EditingActivity';
 
-const Activity = ({ activity, error, loading, fetchActivity, setLoading }) => {
+const Activity = ({ activity, error, removeActivityDetail, fetchActivity }) => {
+  const [isEditing, setIsEditing] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
-    setLoading(true);
     fetchActivity(id);
+
+    return () => removeActivityDetail();
   }, []);
+
+  const handleButtonClick = (e) => {
+    setIsEditing(!isEditing);
+  };
 
   return (
     <section className="Activity-container">
       {error ? (
         <Error />
-      ) : loading ? (
-        <h1>CARGANDO.....</h1>
+      ) : isEditing ? (
+        <EditingActivity
+          handleButtonClick={handleButtonClick}
+          activity={activity}
+        />
       ) : (
         <main className="Activity">
           <header className="Activity-header">
             <h1>{activity.name}</h1>
-            <button className="main-btn">
+            <button onClick={handleButtonClick} className="main-btn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -83,7 +93,7 @@ const Activity = ({ activity, error, loading, fetchActivity, setLoading }) => {
             </div>
             <div className="Activity-countries-container">
               {activity.countries?.map((country) => (
-                <article className="Activity-countries-card">
+                <article key={country.id} className="Activity-countries-card">
                   <img src={country.image} alt={country.name} />
                   <div className="Activity-countries-card-hover">
                     <Link to={`/country/${country.id}`}>
@@ -106,6 +116,8 @@ const mapStateToProps = (state) => ({
   loading: state.loading,
 });
 
-export default connect(mapStateToProps, { fetchActivity, setLoading })(
-  Activity
-);
+export default connect(mapStateToProps, {
+  fetchActivity,
+  setLoading,
+  removeActivityDetail,
+})(Activity);

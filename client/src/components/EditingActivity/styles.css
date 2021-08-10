@@ -1,0 +1,176 @@
+.Edit-Activity {
+  position: relative;
+}
+
+.Edit-Activity input {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.input-name {
+  font-size: 4.5rem;
+  font-weight: bold;
+  max-width: 400px;
+}
+
+.input-description {
+  display: block;
+  margin-top: 10px;
+  border: none;
+  color: black;
+  outline: none;
+}
+
+.Yellow .input-difficulty {
+  color: black;
+}
+
+.input-difficulty {
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.input-difficulty::placeholder {
+  font-size: 2rem;
+}
+
+.input-season {
+  width: 100%;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.Card-season {
+  position: relative;
+}
+
+.input-season-select {
+  opacity: 0;
+  bottom: 24px;
+  padding: 10px 0;
+  position: absolute;
+}
+
+.input-duration {
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  width: 80px;
+  text-align: center;
+}
+
+.add-country {
+  border: 4px dashed black;
+  box-shadow: none;
+  height: 114px;
+  background-color: var(--amarillo);
+  text-align: center;
+  cursor: pointer;
+}
+
+.add-country img {
+  width: 30%;
+  object-fit: contain;
+}
+
+.Add-country-form {
+  padding: 20px;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  right: -370px;
+  bottom: 0;
+  height: 400px;
+  width: 300px;
+  background-color: white;
+  box-shadow: 7px 7px 0 var(--amarillo);
+  border-radius: 8px;
+  transition: all 0.1s ease-in-out;
+}
+
+.Add-country-form.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.Add-country-form::after {
+  position: absolute;
+  content: '';
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  top: calc(50% - 10px);
+  transform: rotate(45deg);
+  left: -10px;
+}
+
+.Add-country-form-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Add-country-form p {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+.Add-country-form-header {
+  filter: drop-shadow(2px 2px 0 var(--amarillo));
+}
+
+.Add-country-form-header svg {
+  width: 30px;
+}
+
+.Add-country-search input {
+  margin: 10px 0;
+  padding: 5px 4px;
+  width: 95%;
+  border: 2px solid black;
+  box-shadow: 2px 2px 0 var(--amarillo);
+  font-size: 1.7rem;
+}
+
+.Add-country-countries {
+  overflow-y: scroll;
+  height: calc(100% - 88px);
+  border-radius: 8px;
+}
+
+.Add-country-card p {
+  padding: 8px 5px;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.Add-country-card p:hover {
+  background-color: var(--amarillo);
+  cursor: pointer;
+}
+
+.Add-country-countries .Add-country-countries-error {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: red;
+}
+
+/* Esconder las flechitas del input:number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+datalist {
+  display: none;
+}
+/* specifically hide the arrow on focus */
+input::-webkit-calendar-picker-indicator {
+  background-color: inherit;
+}

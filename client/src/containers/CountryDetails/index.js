@@ -28,7 +28,7 @@ const CountryDetails = (
   return (
     <div className="CountryDetails">
       <div className="CountryDetails-container">
-        <button onClick={goBack} className="goback  unstyled-link">
+        <button onClick={goBack} className="goback unstyled-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
