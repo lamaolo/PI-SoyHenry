@@ -3,12 +3,18 @@ const router = require("express").Router();
 const { Activity, Country } = require("../db");
 
 router.post("/", (req, res, next) => {
-  const { name, difficulty, description, season, duration, countries } =
-    req.body;
+  const { name, difficulty, description, season, duration, countries } = req.body; //prettier-ignore
 
-  if (!name || !difficulty || !countries || !description) {
+  if (
+    !name ||
+    !difficulty ||
+    !description ||
+    !season ||
+    !duration ||
+    !countries
+  ) {
     return next({
-      message: "Los campos `name`, `difficulty` y `countries` son obligatorios",
+      message: "Todos los campos requeridos son obligatorios",
       status: 400,
     });
   } else {
@@ -20,6 +26,7 @@ router.post("/", (req, res, next) => {
       duration,
     })
       .then((createdActivity) => {
+        console.log(countries);
         createdActivity.setCountries(countries.map((c) => c.toUpperCase()));
         res.json({ data: createdActivity, error: null });
       })

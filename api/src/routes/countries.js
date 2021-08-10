@@ -55,10 +55,6 @@ router.get("/", (req, res, next) => {
 
               Country.bulkCreate(mappedCountries);
 
-              // mappedCountries.forEach((c) => {
-              //   Country.create(c);
-              // });
-
               console.log("Respondiendo con data de la API");
               res.json({ data: mappedCountries, error: null });
             })

@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchActivities } from '../../actions';
 
-import './styles.css';
 import LoadingSpinner from '../../components/LoadingSpinner';
-import { Link } from 'react-router-dom';
+
+import './styles.css';
 
 const Activities = ({ fetchActivities, activities }) => {
   const [isLoading, setIsLoading] = useState(true);

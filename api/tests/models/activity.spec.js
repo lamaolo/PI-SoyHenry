@@ -32,6 +32,7 @@ describe("Activity model", () => {
         difficulty: "2",
         season: "Verano",
         duration: "120", // minutes
+        description: "Descripcion de prueba",
       })
         .then(() => {
           done();
