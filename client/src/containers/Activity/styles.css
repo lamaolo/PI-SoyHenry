@@ -61,7 +61,7 @@
 }
 
 .Activity-body-group-title > .separator {
-  height: 8px;
+  height: 13px;
   width: 100%;
   background-color: var(--amarillo);
 }

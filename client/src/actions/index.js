@@ -61,7 +61,7 @@ export const fetchActivities = (setIsLoading) => {
     axios(`${BASE_API}/activities`)
       .then(({ data: { data } }) => {
         setIsLoading && setIsLoading(false);
-
+        dispatch(setError(''));
         dispatch({ type: 'FETCH_ACTIVITIES', payload: data });
       })
       .catch((error) => {
