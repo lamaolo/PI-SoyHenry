@@ -28,7 +28,7 @@ router.post("/", (req, res, next) => {
 });
 
 router.get("/", (req, res, next) => {
-  Activity.findAll()
+  Activity.findAll({ include: { model: Country, attributes: ["name"] } })
     .then((activities) => {
       res.json({ data: activities, error: null });
     })
@@ -55,16 +55,20 @@ router.get("/:id", (req, res, next) => {
 
 router.patch("/:id", (req, res, next) => {
   const { id } = req.params;
-
   const toUpdate = {};
+  const { countries } = req.body;
 
   for (const key in req.body) {
     if (req.body[key]) toUpdate[key] = req.body[key];
   }
 
-  Activity.update(toUpdate, { where: { id } })
-    .then((updated) => {
-      res.json({ data: updated, error: null });
+  Activity.findByPk(id)
+    .then((activity) => {
+      activity.setCountries(countries).then(() => {
+        activity
+          .update(toUpdate)
+          .then(() => res.json({ data: "Actualizao", error: null }));
+      });
     })
     .catch((error) => next({ message: error.message }));
 });
