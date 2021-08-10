@@ -9,6 +9,7 @@ import Countries from '../../components/Countries';
 import { fetchCountries, fetchActivities } from '../../actions';
 
 import './styles.css';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const Home = ({ fetchCountries, fetchActivities, loading }) => {
   useEffect(() => {
@@ -23,7 +24,7 @@ const Home = ({ fetchCountries, fetchActivities, loading }) => {
         <Filters />
       </header>
       <main className="Home-main">
-        {loading ? <div className="loading-css"></div> : <Countries />}
+        {loading ? <LoadingSpinner /> : <Countries />}
       </main>
     </div>
   );

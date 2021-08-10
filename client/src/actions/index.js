@@ -56,10 +56,12 @@ export const fetchActivity = (payload) => {
   };
 };
 
-export const fetchActivities = () => {
+export const fetchActivities = (setIsLoading) => {
   return (dispatch) => {
     axios(`${BASE_API}/activities`)
       .then(({ data: { data } }) => {
+        setIsLoading && setIsLoading(false);
+
         dispatch({ type: 'FETCH_ACTIVITIES', payload: data });
       })
       .catch((error) => {

@@ -1,0 +1,30 @@
+.loading-css {
+  margin: 50px auto 0;
+  width: 80px;
+  height: 80px;
+}
+.loading-css:after {
+  content: ' ';
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: loading-css 1.2s linear infinite;
+}
+
+.loading-css.dark::after {
+  border: 6px solid #000;
+  border-color: #000 transparent #000 transparent;
+}
+
+@keyframes loading-css {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
