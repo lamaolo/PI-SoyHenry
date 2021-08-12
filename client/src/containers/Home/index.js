@@ -5,11 +5,10 @@ import { useEffect } from 'react';
 import Search from '../../components/Search';
 import Filters from '../../components/Filters';
 import Countries from '../../components/Countries';
-
+import LoadingSpinner from '../../components/LoadingSpinner';
 import { fetchCountries, fetchActivities } from '../../actions';
 
 import './styles.css';
-import LoadingSpinner from '../../components/LoadingSpinner';
 
 const Home = ({ fetchCountries, fetchActivities, loading }) => {
   useEffect(() => {

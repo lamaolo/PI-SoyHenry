@@ -3,11 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
+import EditingActivity from '../../components/EditingActivity';
 import Error from '../../components/Error';
 import { setLoading, fetchActivity, removeActivityDetail } from '../../actions';
 
 import './styles.css';
-import EditingActivity from '../../components/EditingActivity';
 
 const Activity = ({ activity, error, removeActivityDetail, fetchActivity }) => {
   const [isEditing, setIsEditing] = useState(false);

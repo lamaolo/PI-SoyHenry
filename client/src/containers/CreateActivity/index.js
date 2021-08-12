@@ -209,6 +209,7 @@ const CreateActivity = ({
             ))}
           </datalist>
         </div>
+
         <div className="Countries-to-add">
           {countries
             .filter((c) => values.countries.includes(c.id))

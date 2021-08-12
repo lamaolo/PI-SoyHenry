@@ -16,7 +16,6 @@ const CountryDetails = (
 
   useEffect(() => {
     setCountryDetail(match.params.id);
-    console.log(props.history);
 
     return () => setCountryDetail(null);
   }, []);

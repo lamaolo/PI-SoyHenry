@@ -66,16 +66,18 @@
 }
 
 .add-country {
+  height: 114px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 4px dashed black;
   box-shadow: none;
-  height: 114px;
   background-color: var(--amarillo);
-  text-align: center;
   cursor: pointer;
 }
 
-.add-country img {
-  width: 30%;
+.add-country svg {
+  width: 50px;
   object-fit: contain;
 }
 
@@ -117,7 +119,7 @@
 
 .Add-country-form p {
   margin: 0;
-  font-size: 2.4rem;
+  font-size: 2.6rem;
   font-weight: bold;
 }
 

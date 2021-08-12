@@ -52,7 +52,7 @@ const Countries = ({ countries, filter, error, setError }) => {
     <>
       <div className="Countries-filters">
         <h1 className="Countries-continent">
-          {filter.continent || 'Todos los paises'}
+          {filter.continent === 'Todos' ? 'Todos los paises' : filter.continent}
         </h1>
         <Link className="unstyled-link" to="/create/activity">
           <button className="Countries-createactivity main-btn">

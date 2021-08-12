@@ -14,6 +14,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  animation: 1s showCard ease;
 }
 
 .CountryCard-name {
@@ -73,4 +74,16 @@
 
 .CountryCard-action button {
   margin-bottom: 71px;
+}
+
+@keyframes showCard {
+  from {
+    filter: blur(5px);
+    opacity: 0;
+  }
+
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
 }

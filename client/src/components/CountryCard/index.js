@@ -4,7 +4,10 @@ import './styles.css';
 
 const CountryCard = ({ id, name, continent, image }) => {
   return (
-    <article className="CountryCard">
+    <article
+      style={{ width: '393px', height: '300px' }}
+      className="CountryCard"
+    >
       <img src={image} alt={name} />
       <div className="CountryCard-name">
         <h1>{name}</h1>
