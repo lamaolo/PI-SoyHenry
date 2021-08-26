@@ -26,7 +26,6 @@ router.post("/", (req, res, next) => {
       duration,
     })
       .then((createdActivity) => {
-        console.log(countries);
         createdActivity.setCountries(countries.map((c) => c.toUpperCase()));
         res.json({ data: createdActivity, error: null });
       })

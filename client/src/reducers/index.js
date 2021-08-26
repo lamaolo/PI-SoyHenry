@@ -57,16 +57,6 @@ const reducers = (state = initialState, action) => {
         error: action.payload,
       };
     }
-    case 'FILTER_COUNTRIES_BY_CONTINENT': {
-      return {
-        ...state,
-        filter: {
-          ...state.filter,
-          continent: action.payload === 'Todos' ? false : action.payload,
-        },
-        error: '',
-      };
-    }
     case 'SET_COUNTRY_DETAIL': {
       return {
         ...state,

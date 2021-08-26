@@ -113,11 +113,6 @@ export const setCountryDetail = (payload) => {
   };
 };
 
-export const setFilteredCountries = (payload) => ({
-  type: 'SET_FILTERED_COUNTIRES',
-  payload,
-});
-
 export const setFilters = (payload) => ({
   type: 'SET_FILTERS',
   payload,
