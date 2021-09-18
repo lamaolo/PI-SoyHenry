@@ -13,8 +13,10 @@ const Dropdown = ({
     <div className="Dropdown-container">
       {filterName && <p className="Dropdown-name">{filterName}</p>}
       <div
+        tabIndex="1"
         className={`Dropdown unstyled-btn ${theme}`}
         onClick={() => setIsVisible(!isVisible)}
+        onBlur={() => setIsVisible(false)}
       >
         {name}
         <svg

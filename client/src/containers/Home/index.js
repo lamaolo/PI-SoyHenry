@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { connect } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Search from '../../components/Search';
 import Filters from '../../components/Filters';
@@ -10,9 +10,11 @@ import { fetchCountries, fetchActivities } from '../../actions';
 
 import './styles.css';
 
-const Home = ({ fetchCountries, fetchActivities, loading }) => {
+const Home = ({ fetchCountries, fetchActivities }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    fetchCountries();
+    fetchCountries(setIsLoading);
     fetchActivities();
   }, []);
 
@@ -23,7 +25,7 @@ const Home = ({ fetchCountries, fetchActivities, loading }) => {
         <Filters />
       </header>
       <main className="Home-main">
-        {loading ? <LoadingSpinner /> : <Countries />}
+        {isLoading ? <LoadingSpinner /> : <Countries />}
       </main>
     </div>
   );
@@ -32,9 +34,10 @@ const Home = ({ fetchCountries, fetchActivities, loading }) => {
 const mapStateToProps = (state) => {
   return {
     loading: state.loading,
+    error: state.error
   };
 };
 
-export default connect(mapStateToProps, { fetchCountries, fetchActivities })(
+export default connect(mapStateToProps, { fetchCountries, fetchActivities})(
   Home
 );

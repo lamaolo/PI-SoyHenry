@@ -11,10 +11,12 @@ import './styles.css';
 
 const Activity = ({ activity, error, removeActivityDetail, fetchActivity }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   const { id } = useParams();
 
   useEffect(() => {
-    fetchActivity(id);
+    fetchActivity(id, setIsLoading);
 
     return () => removeActivityDetail();
   }, []);
@@ -35,7 +37,7 @@ const Activity = ({ activity, error, removeActivityDetail, fetchActivity }) => {
       ) : (
         <main className="Activity">
           <header className="Activity-header">
-            <h1>{activity.name}</h1>
+            <h1>{!isLoading ? activity.name : "Cargando..."}</h1>
             <button onClick={handleButtonClick} className="main-btn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +62,7 @@ const Activity = ({ activity, error, removeActivityDetail, fetchActivity }) => {
                 <b>Acerca de la actividad</b>
                 <div className="separator"></div>
               </div>
-              <p>{activity.description}</p>
+              <p>{!isLoading ? activity.description : "Cargando..."}</p>
             </div>
             <div className="Activity-cards">
               <div

@@ -231,7 +231,7 @@ const CreateActivity = ({
             type="submit"
             className="main-btn"
           >
-            Crear actividad
+            {isButtonDisabled ? 'Cargando...' : 'Crear actividad'}
           </button>
         </div>
         {error ? (

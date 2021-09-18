@@ -3,7 +3,11 @@ const axios = require("axios");
 const { Sequelize } = require("sequelize");
 
 const { Country, Activity } = require("../db");
+const cacheMiddleware = require("../middleware/response-cache");
+
 const API_BASE = process.env.API;
+
+const SECONDS_IN_A_DAY = 86400;
 
 //?name=abc
 router.get("/", (req, res, next) => {

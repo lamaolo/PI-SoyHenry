@@ -3,7 +3,7 @@ const { conn } = require("./src/db.js");
 
 // Syncing all the models at once.
 conn
-  .sync({ force: true })
+  .sync({ force: false }) // { force: true } for development
   .then(() => {
     console.log("[DB]: DB Conectada.");
     server.listen(3001, () => {

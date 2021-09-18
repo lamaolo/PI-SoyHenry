@@ -14,15 +14,17 @@ export const setLoading = (payload) => ({
 
 export const filterName = (payload) => {
   return (dispatch) => {
+    if (!payload) return dispatch(fetchCountries());
+
     axios(`${BASE_API}/countries?name=${payload}`)
       .then(({ data: { data } }) => {
         dispatch({ type: 'FILTER_COUNTRIES_BY_NAME', payload: data });
       })
-      .catch(() =>
+      .catch(() => {
         dispatch(
           setError(`No se encontró ningún pais con el nombre "${payload}"`)
-        )
-      );
+        );
+      });
   };
 };
 
@@ -41,10 +43,11 @@ export const removeActivityDetail = () => ({
   type: 'REMOVE_ACTIVITY_DETAIL',
 });
 
-export const fetchActivity = (payload) => {
+export const fetchActivity = (payload, setIsLoading) => {
   return (dispatch) => {
     axios(`${BASE_API}/activities/${payload}`)
       .then(({ data: { data } }) => {
+        setIsLoading && setIsLoading(false)
         dispatch(setLoading(false));
         dispatch({ type: 'SET_ACITIVTY', payload: data });
       })
@@ -118,14 +121,15 @@ export const setFilters = (payload) => ({
   payload,
 });
 
-export const fetchCountries = () => {
+export const fetchCountries = (setIsLoading) => {
   return (dispatch) => {
     axios(`${BASE_API}/countries`)
-      .then(({ data: { data } }) =>
-        dispatch({ type: 'SET_COUNTRIES', payload: data })
-      )
+      .then(({ data: { data } }) => {
+        setIsLoading && setIsLoading();
+        dispatch({ type: 'SET_COUNTRIES', payload: data });
+      })
       .catch((error) => {
-        console.log(error);
+        console.log("ERROR: ", error);
         dispatch(
           setError(
             'Ha ocurrido un error inesperado mientras se cargaban los paises.'

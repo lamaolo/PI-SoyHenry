@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { filterName } from '../../actions';
+import { filterName, setLoading } from '../../actions';
 
 import './styles.css';
 
-const Search = ({ filterName }) => {
+const Search = ({ filterName, setLoading }) => {
   const [value, setValue] = useState('');
 
   const handleSearch = (e) => {
     e.preventDefault();
-
+    setLoading(true);
     filterName(value);
   };
 
@@ -42,4 +42,4 @@ const Search = ({ filterName }) => {
     </form>
   );
 };
-export default connect(null, { filterName })(Search);
+export default connect(null, { filterName, setLoading })(Search);

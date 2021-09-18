@@ -39,6 +39,7 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         countries: action.payload,
+        loading: false,
         error: '',
       };
     }
