@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_API = 'http://localhost:3001/api';
+const BASE_API = 'https://pi-countries-henry.herokuapp.com/api';
 
 export const setError = (payload) => ({
   type: 'SET_ERROR',
