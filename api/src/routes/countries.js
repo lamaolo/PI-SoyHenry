@@ -6,6 +6,7 @@ const { Country, Activity } = require("../db");
 const cacheMiddleware = require("../middleware/response-cache");
 
 const API_BASE = process.env.API;
+const API_KEY = process.env.API_KEY;
 
 const SECONDS_IN_A_DAY = 86400;
 
@@ -43,7 +44,7 @@ router.get("/", (req, res, next) => {
     })
       .then((countries) => {
         if (!countries.length) {
-          axios(`${API_BASE}/all`)
+          axios(`${API_BASE}/all?access_key=${API_KEY}`)
             .then(({ data }) => {
               // Mapeo respuesta de la API para que matchee con el model de la DB.
               const mappedCountries = data.map((country) => ({
